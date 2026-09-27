@@ -27,6 +27,7 @@ jobs:
       - run: python -m pip install --upgrade pip
       - run: python -m pip install -r requirements-lock.txt
       - run: python -m pip install -e .
+      - run: python -m research2slides.cli.app render examples/phase5/paper-reading
       - run: python -m pytest -q
       - run: python scripts/export_schemas.py --check
 
