@@ -11,3 +11,9 @@ python -m pytest -q
 python scripts/export_schemas.py --check
 python C:\Users\10411\.codex\skills\.system\skill-creator\scripts\quick_validate.py .agents\skills\research-presentation
 ```
+
+在受限环境（例如 TEMP 目录不可写的沙箱）下，pytest 的默认临时目录会触发 `PermissionError`，此时改用项目内基线目录：
+
+```powershell
+python -m pytest -q --basetemp=.pytest_tmp -p no:cacheprovider
+```

@@ -137,6 +137,6 @@ export async function renderWorkspace(
 export { loadRenderInputs, resolveThemeFont } from "./load.js";
 export { validateSlideSpec } from "./validate.js";
 export { boxesFor } from "./layouts/index.js";
-export { parseLatexTable } from "./components/visuals.js";
+export { latexToText, parseLatexTable } from "./components/visuals.js";
 export { RendererError } from "./errors.js";
 export { sanitizePptxContentTypes } from "./sanitize.js";

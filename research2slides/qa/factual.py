@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import hashlib
-import re
 from pathlib import Path
 
 from research2slides.models import (
@@ -14,14 +13,12 @@ from research2slides.models import (
     SlideSpec,
     VisualManifest,
 )
+from research2slides.numbers import number_keys
 from research2slides.qa.common import issue
 
 
-NUMBER_RE = re.compile(r"(?<![A-Za-z])\d+(?:\.\d+)?%?")
-
-
 def _numbers(text: str) -> set[str]:
-    return set(NUMBER_RE.findall(text))
+    return number_keys(text)
 
 
 def _sha256(path: Path) -> str:

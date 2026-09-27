@@ -317,6 +317,12 @@ python .agents\skills\research-presentation\scripts\validate_artifacts.py exampl
 python scripts\validate_pptx.py examples\phase5\paper-reading\output\presentation.pptx --expected-slides 6 --require-notes --require-native-table --require-editable-equation --require-svg
 ```
 
+如果运行环境的 `TEMP` 目录不可写（受限沙箱），pytest 会报 `PermissionError` 并让大量用例错误退出；改用项目内的基线临时目录即可：
+
+```powershell
+python -m pytest -q --basetemp=.pytest_tmp -p no:cacheprovider
+```
+
 fixture 可重建：
 
 ```powershell

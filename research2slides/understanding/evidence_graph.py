@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import hashlib
-import re
 
 from research2slides.exceptions import EvidenceError
 from research2slides.models import (
@@ -15,6 +14,7 @@ from research2slides.models import (
     UnderstandingAnswers,
     UnderstandingProvenance,
 )
+from research2slides.numbers import missing_numbers
 from research2slides.understanding.catalog import SourceCatalog
 
 
@@ -33,8 +33,6 @@ CATEGORIES: tuple[InsightCategory, ...] = (
     "audience_takeaways",
 )
 NUMERIC_RESULT_TYPES = {"experimental_result", "ablation_result"}
-NUMBER_RE = re.compile(r"(?<![A-Za-z])[-+]?\d+(?:\.\d+)?%?")
-
 
 def _evidence_id(claim: str, source_ids: list[str]) -> str:
     seed = claim.strip().casefold() + "\0" + "\0".join(source_ids)
@@ -44,12 +42,11 @@ def _evidence_id(claim: str, source_ids: list[str]) -> str:
 def _validate_numbers(claim_type: str, claim: str, source_texts: list[str]) -> None:
     if claim_type not in NUMERIC_RESULT_TYPES:
         return
-    claimed_numbers = set(NUMBER_RE.findall(claim))
-    source_numbers = set(NUMBER_RE.findall(" ".join(source_texts)))
-    missing = sorted(claimed_numbers - source_numbers)
+    missing = missing_numbers(claim, " ".join(source_texts))
     if missing:
         raise EvidenceError(
-            "Quantitative claim contains values absent from its cited evidence: " + ", ".join(missing)
+            "Quantitative claim contains values absent from its cited evidence: "
+            + ", ".join(missing)
         )
 
 

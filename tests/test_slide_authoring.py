@@ -9,16 +9,22 @@ from research2slides.exceptions import SlideSpecError
 from research2slides.language_policy import contains_cjk
 from research2slides.models import (
     EvidenceGraph,
+    EvidenceNode,
     PaperStructure,
     PresentationMode,
     PresentationPlan,
     SlideSpecProvenance,
+    SourceLocator,
     VisualManifest,
 )
 from research2slides.pipeline import parse_sources
 from research2slides.planning.pipeline import run_planning
 from research2slides.planning.providers import JsonStorylineProvider
-from research2slides.slide_authoring.builder import build_slide_spec
+from research2slides.slide_authoring.builder import (
+    _citation,
+    _tabular_column_count,
+    build_slide_spec,
+)
 from research2slides.slide_authoring.pipeline import run_slide_authoring
 from research2slides.slide_authoring.providers import JsonSlideSpecProvider
 from research2slides.understanding.pipeline import run_understanding
@@ -165,3 +171,80 @@ def test_slide_spec_rejects_english_first_copy(tmp_path: Path) -> None:
     draft.slides[0].title = "Attention becomes the architectural core"
     with pytest.raises(SlideSpecError, match="Chinese-first language profile"):
         build_slide_spec(plan, draft, graph, paper, visuals, theme, provenance)
+
+
+def test_tabular_column_count_reads_the_declared_column_spec() -> None:
+    grouped = (
+        r"\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lrrrrrr@{}}"
+        r"\toprule Variant & \multicolumn{2}{c}{Factual prediction} & "
+        r"\multicolumn{3}{c}{Candidate selection} & Control \\ \bottomrule\end{tabular*}"
+    )
+    assert _tabular_column_count(grouped) == 7
+    assert _tabular_column_count(r"\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}lrr@{}}x\end{tabular*}") == 3
+    assert _tabular_column_count(r"\begin{tabular}{@{}llrr@{}}x\end{tabular}") == 4
+    assert _tabular_column_count(r"\begin{tabular}{@{}llrr@{") is None
+    assert _tabular_column_count("no tabular here") is None
+
+
+def test_table_column_labels_accept_the_declared_column_count(tmp_path: Path) -> None:
+    workspace, provider, theme = make_phase3_workspace(tmp_path, PresentationMode.PAPER_READING)
+    plan = read_model(workspace / "data" / "presentation_plan.json", PresentationPlan)
+    graph = read_model(workspace / "data" / "evidence_graph.json", EvidenceGraph)
+    paper = read_model(workspace / "data" / "paper_structure.json", PaperStructure)
+    visuals = read_model(workspace / "data" / "visual_manifest.json", VisualManifest)
+    provenance = SlideSpecProvenance(
+        provider="test",
+        model="test",
+        prompt_version="test",
+        input_fingerprint="0" * 64,
+    )
+    draft = provider.author("")
+    table_slide = next(slide for slide in draft.slides if slide.layout == "table_focus")
+    table_slide.visuals[0].table_column_labels = ["方法", "得分"]
+    spec = build_slide_spec(plan, draft, graph, paper, visuals, theme, provenance)
+    rendered = next(
+        visual
+        for slide in spec.slides
+        for visual in slide.visuals
+        if visual.kind == "source_table"
+    )
+    assert rendered.table_column_labels == ["方法", "得分"]
+
+    short_draft = provider.author("")
+    short_slide = next(slide for slide in short_draft.slides if slide.layout == "table_focus")
+    short_slide.visuals[0].table_column_labels = ["方法"]
+    with pytest.raises(SlideSpecError, match="table_column_labels"):
+        build_slide_spec(plan, short_draft, graph, paper, visuals, theme, provenance)
+
+
+def test_citation_labels_are_deduplicated() -> None:
+    node = EvidenceNode(
+        id="evidence_test",
+        type="method",
+        claim="A grounded claim.",
+        sources=[
+            SourceLocator(
+                source_type="paragraph",
+                source_id="para_1",
+                section="Method",
+                excerpt="first excerpt",
+            ),
+            SourceLocator(
+                source_type="paragraph",
+                source_id="para_2",
+                section="Method",
+                excerpt="second excerpt",
+            ),
+            SourceLocator(
+                source_type="equation",
+                source_id="eq_1",
+                section="Method",
+                equation="3",
+                excerpt="third excerpt",
+            ),
+        ],
+        confidence="high",
+    )
+    citation = _citation("evidence_test", {"evidence_test": node})
+    assert citation.display_text == "Method; Method, Equation 3"
+    assert citation.source_ids == ["para_1", "para_2", "eq_1"]

@@ -18,6 +18,8 @@ def _export_with_soffice(pptx_path: Path, pdf_path: Path) -> None:
         [soffice, "--headless", "--convert-to", "pdf", "--outdir", str(pdf_path.parent), str(pptx_path)],
         capture_output=True,
         text=True,
+        encoding="utf-8",
+        errors="replace",
         check=False,
     )
     generated = pdf_path.parent / f"{pptx_path.stem}.pdf"
@@ -53,6 +55,8 @@ try {{
         [powershell, "-NoProfile", "-NonInteractive", "-EncodedCommand", encoded],
         capture_output=True,
         text=True,
+        encoding="utf-8",
+        errors="replace",
         check=False,
         timeout=120,
     )
@@ -119,6 +123,8 @@ def render_pdf_previews(pdf_path: Path, preview_dir: Path, *, scale: float = 1.6
         [pdftoppm, "-png", "-r", str(dpi), str(pdf_path), str(prefix)],
         capture_output=True,
         text=True,
+        encoding="utf-8",
+        errors="replace",
         check=False,
         timeout=120,
     )

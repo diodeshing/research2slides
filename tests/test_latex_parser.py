@@ -40,6 +40,29 @@ Grounded content for the parser.
     assert result.title == "DeepSeek-V3 Technical Report"
 
 
+def test_latex_parser_keeps_escaped_percent_and_drops_comments(tmp_path: Path) -> None:
+    (tmp_path / "main.tex").write_text(
+        r"""\documentclass{article}
+\begin{document}
+\section{Results}
+Hard-start success improves from $3.7\%$ to $52.0\%$ on matched starts. % trailing comment
+\begin{table}
+\caption{Cube success (\%) on matched starts.}
+\begin{tabular}{cc}A&B\\\end{tabular}
+\end{table}
+\end{document}
+""",
+        encoding="utf-8",
+    )
+    result = LatexParser().parse(tmp_path)
+    paragraph = next(item.text for item in result.paragraphs if "Hard-start" in item.text)
+    assert (
+        "Hard-start success improves from $3.7%$ to $52.0%$ on matched starts." in paragraph
+    )
+    assert "trailing comment" not in paragraph
+    assert result.tables[0].caption == "Cube success (%) on matched starts."
+
+
 def test_latex_parser_extracts_starred_float_environments(tmp_path: Path) -> None:
     (tmp_path / "figure.pdf").write_bytes(b"%PDF-1.4\n")
     (tmp_path / "main.tex").write_text(

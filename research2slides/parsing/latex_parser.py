@@ -67,8 +67,28 @@ def _environment(text: str, name: str) -> list[tuple[int, str]]:
     return [(match.start(), match.group(1).strip()) for match in pattern.finditer(text)]
 
 
+ESCAPED_PERCENT = "\x00percent\x00"
+
+
+def _strip_comments(text: str) -> str:
+    """Remove LaTeX comments without eating escaped percent signs.
+
+    A `%` starts a comment unless it is escaped: `\\%` is a literal percent
+    sign, while `\\\\%` is a line break followed by a comment. The number of
+    backslashes in front of the percent sign decides, so `\\%` is protected
+    before comments are removed and restored afterwards.
+    """
+    protected = re.sub(
+        r"(?<!\\)((?:\\\\)*)\\%",
+        lambda match: match.group(1) + ESCAPED_PERCENT,
+        text,
+    )
+    protected = re.sub(r"(?m)%.*$", "", protected)
+    return protected.replace(ESCAPED_PERCENT, "%")
+
+
 def _clean_text(text: str) -> str:
-    text = re.sub(r"(?m)%.*$", "", text)
+    text = _strip_comments(text)
     text = re.sub(r"\\(?:cite|ref|eqref|autoref)\s*\{[^{}]*\}", "", text)
     text = re.sub(r"\\[a-zA-Z@]+\*?(?:\[[^\]]*\])?", "", text)
     text = text.replace("{", "").replace("}", "")

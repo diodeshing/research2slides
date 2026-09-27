@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import hashlib
-import re
 
 from research2slides.exceptions import PlanningError
 from research2slides.language_policy import require_plan_chinese
@@ -15,9 +14,9 @@ from research2slides.models import (
     StorylineDraft,
     StorylineRole,
 )
+from research2slides.numbers import missing_numbers
 
 
-NUMBER_RE = re.compile(r"(?<![A-Za-z])[-+]?\d+(?:\.\d+)?%?")
 PAPER_READING_FORBIDDEN = ("we propose", "our method", "我们提出", "我们的方法")
 ENDING_ROLES = {"conclusion", "takeaway"}
 METHOD_ROLES = {"method_overview", "method_component"}
@@ -113,14 +112,14 @@ def build_presentation_plan(
             lowered = unit.main_claim.casefold()
             if any(phrase in lowered for phrase in PAPER_READING_FORBIDDEN):
                 raise PlanningError("paper-reading storyline uses own-research voice")
-        claim_numbers = set(NUMBER_RE.findall(unit.main_claim))
-        evidence_numbers = set(
-            NUMBER_RE.findall(" ".join(nodes[evidence_id].claim for evidence_id in unit.evidence_ids))
+        missing_claim_numbers = missing_numbers(
+            unit.main_claim,
+            " ".join(nodes[evidence_id].claim for evidence_id in unit.evidence_ids),
         )
-        missing_numbers = sorted(claim_numbers - evidence_numbers)
-        if missing_numbers:
+        if missing_claim_numbers:
             raise PlanningError(
-                "Storyline claim contains values absent from its evidence nodes: " + ", ".join(missing_numbers)
+                "Storyline claim contains values absent from its evidence nodes: "
+                + ", ".join(missing_claim_numbers)
             )
         units.append(
             PresentationUnit(

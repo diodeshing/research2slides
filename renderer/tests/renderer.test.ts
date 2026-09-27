@@ -9,6 +9,7 @@ import JSZip from "jszip";
 import {
   boxesFor,
   loadRenderInputs,
+  latexToText,
   parseLatexTable,
   renderWorkspace,
   validateSlideSpec,
@@ -89,6 +90,64 @@ Transformer \citep{paper} & \textbf{28.4} & $41.8$ \\
     ["", "EN-DE", "EN-FR"],
     ["Transformer", "28.4", "41.8"],
   ]);
+});
+
+test("starred tabular environments parse with width arguments skipped", () => {
+  const rows = parseLatexTable({
+    table_id: "table_starred",
+    number: "2",
+    caption: "Starred tabular",
+    latex: String.raw`\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}llrr@{}}
+\toprule
+\rowcolor{ADHeader}
+Method & Inference & HS (\%) & P04 \\
+\midrule
+LeWM & CEM & $3.7{\pm}1.4$ & $0.0{\pm}0.0$ \\
+\rowcolor{ADDefault}
+\textbf{AD-WM} & CEM & $52.0{\pm}3.1$ & $25.3{\pm}3.4$ \\
+\bottomrule
+\end{tabular*}`,
+  });
+  assert.deepEqual(rows, [
+    ["Method", "Inference", "HS (%)", "P04"],
+    ["LeWM", "CEM", "3.7±1.4", "0.0±0.0"],
+    ["AD-WM", "CEM", "52.0±3.1", "25.3±3.4"],
+  ]);
+});
+
+test("table cells map math symbols to readable Unicode", () => {
+  const rows = parseLatexTable({
+    table_id: "table_symbols",
+    number: "3",
+    caption: "Symbols",
+    latex: String.raw`\begin{tabular}{lrrr}
+\toprule
+Metric & $\bar R_{30}\downarrow$ & HS (\%) $\uparrow$ & One-step MSE $\downarrow$ \\
+\midrule
+LeWM & $0.074\pm0.006$ & $3.7\pm1.4$ & $2.72\pm0.06$ \\
+\bottomrule
+\end{tabular}`,
+  });
+  assert.deepEqual(rows, [
+    ["Metric", "R̄_30↓", "HS (%) ↑", "One-step MSE ↓"],
+    ["LeWM", "0.074±0.006", "3.7±1.4", "2.72±0.06"],
+  ]);
+});
+
+test("LaTeX equations convert to readable Unicode text", () => {
+  assert.equal(
+    latexToText(String.raw`\hat z_{t+1}=z_t+\Delta\hat z_t.`),
+    "ẑₜ₊₁=z_t+Δẑ_t.",
+  );
+  assert.equal(
+    latexToText(String.raw`\tfrac12\|\bar e_t-\mu_\eta\|_2^2`),
+    "(1)/(2)‖ē_t-μ_η‖₂²",
+  );
+  assert.equal(
+    latexToText(String.raw`\min_{a\in\mathcal A}c^\star(a)`),
+    "min_(a∈ A)c^⋆(a)",
+  );
+  assert.equal(latexToText("Attention(Q,K,V)=softmax(QK^T)V"), "Attention(Q,K,V)=softmax(QK^T)V");
 });
 
 test("renderer writes, reuses, and partially renders a PPTX", async () => {

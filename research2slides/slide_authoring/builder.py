@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import re
+
 from research2slides.exceptions import SlideSpecError
 from research2slides.language_policy import require_slide_chinese
 from research2slides.models import (
@@ -31,6 +33,51 @@ GENERIC_TITLES = {
     "结论",
 }
 BAD_TITLE_PUNCTUATION = ("—", ";", "|", "→")
+COLUMN_SPEC_LETTERS = "lcrpmbX"
+
+
+def _brace_group(text: str, start: int) -> tuple[str, int] | None:
+    index = start
+    while index < len(text) and text[index].isspace():
+        index += 1
+    if index >= len(text) or text[index] != "{":
+        return None
+    depth = 0
+    for cursor in range(index, len(text)):
+        if text[cursor] == "{":
+            depth += 1
+        elif text[cursor] == "}":
+            depth -= 1
+            if depth == 0:
+                return text[index + 1 : cursor], cursor + 1
+    return None
+
+
+def _tabular_column_count(latex: str | None) -> int | None:
+    """Count the columns declared by a tabular environment.
+
+    Splitting the first `&`-row undercounts tables whose header is grouped
+    across several rows (a `multicol` group row has fewer cells than the table
+    has columns), while the renderer compares labels against the parsed table
+    width. Reading the declared column spec keeps both checks on one contract.
+    """
+    if not latex:
+        return None
+    match = re.search(r"\\begin\{(tabular\*?)\}", latex)
+    if match is None:
+        return None
+    cursor = match.end()
+    if match.group(1).endswith("*"):
+        width = _brace_group(latex, cursor)
+        if width is None:
+            return None
+        cursor = width[1]
+    spec = _brace_group(latex, cursor)
+    if spec is None:
+        return None
+    spec_text = re.sub(r"@\{(?:[^{}]|\{[^{}]*\})*\}", "", spec[0])
+    count = sum(1 for character in spec_text if character in COLUMN_SPEC_LETTERS)
+    return count or None
 
 
 def _citation(evidence_id: str, graph_nodes: dict[str, object]) -> SlideCitation:
@@ -49,7 +96,9 @@ def _citation(evidence_id: str, graph_nodes: dict[str, object]) -> SlideCitation
             parts.append(f"Table {source.table}")
         if source.equation:
             parts.append(f"Equation {source.equation}")
-        labels.append(", ".join(parts) or source.source_id)
+        label = ", ".join(parts) or source.source_id
+        if label not in labels:
+            labels.append(label)
     return SlideCitation(
         evidence_id=evidence_id,
         source_ids=source_ids,
@@ -145,7 +194,8 @@ def build_slide_spec(
                 if source_table.latex is None:
                     raise SlideSpecError(f"slide {order} table labels require editable LaTeX table data")
                 header = source_table.latex.split(r"\\", maxsplit=1)[0]
-                if len(visual.table_column_labels) != len(header.split("&")):
+                expected_columns = _tabular_column_count(source_table.latex) or len(header.split("&"))
+                if len(visual.table_column_labels) != expected_columns:
                     raise SlideSpecError(f"slide {order} table_column_labels do not match source columns")
             if visual.kind == "source_equation" and visual.treatment not in {"equation", "highlight"}:
                 raise SlideSpecError(f"slide {order} uses an incompatible equation treatment")
