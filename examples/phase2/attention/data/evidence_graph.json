@@ -1,0 +1,143 @@
+{
+  "schema_version": "1.1",
+  "paper_id": "attention-is-all-you-need-277a3557ef",
+  "nodes": [
+    {
+      "id": "evidence_d95a34ac8471",
+      "type": "problem",
+      "claim": "Sequence modeling motivates an architecture centered on attention operations.",
+      "sources": [
+        {
+          "source_type": "paragraph",
+          "source_id": "para_tex_00002",
+          "page": null,
+          "section": "Introduction",
+          "figure": null,
+          "table": null,
+          "equation": null,
+          "label": null,
+          "bbox": null,
+          "excerpt": "Sequence modeling motivates an architecture centered on attention operations."
+        }
+      ],
+      "confidence": "high"
+    },
+    {
+      "id": "evidence_38e5dbdebe5f",
+      "type": "contribution",
+      "claim": "The attention block connects queries, keys, and values.",
+      "sources": [
+        {
+          "source_type": "paragraph",
+          "source_id": "para_tex_00004",
+          "page": null,
+          "section": "Attention",
+          "figure": null,
+          "table": null,
+          "equation": null,
+          "label": null,
+          "bbox": null,
+          "excerpt": "The attention block connects queries, keys, and values in this synthetic example."
+        }
+      ],
+      "confidence": "high"
+    },
+    {
+      "id": "evidence_49c833ade712",
+      "type": "equation",
+      "claim": "The fixture defines attention as Attention(Q,K,V)=softmax(QK^T)V.",
+      "sources": [
+        {
+          "source_type": "equation",
+          "source_id": "eq_001",
+          "page": null,
+          "section": "Model Architecture",
+          "figure": null,
+          "table": null,
+          "equation": "1",
+          "label": "eq:attention",
+          "bbox": null,
+          "excerpt": "Attention(Q,K,V)=softmax(QK^T)V"
+        }
+      ],
+      "confidence": "high"
+    },
+    {
+      "id": "evidence_f918ef30ed37",
+      "type": "experimental_result",
+      "claim": "The fixture model scores 11.0 versus 10.0 for the fixture baseline.",
+      "sources": [
+        {
+          "source_type": "table",
+          "source_id": "table_001",
+          "page": null,
+          "section": "Experiments",
+          "figure": null,
+          "table": "1",
+          "equation": null,
+          "label": "tab:results",
+          "bbox": null,
+          "excerpt": "Fixture evaluation results."
+        }
+      ],
+      "confidence": "high"
+    },
+    {
+      "id": "evidence_2aaf4548dfbf",
+      "type": "limitation",
+      "claim": "The result values are invented solely for software testing.",
+      "sources": [
+        {
+          "source_type": "paragraph",
+          "source_id": "para_tex_00005",
+          "page": null,
+          "section": "Experiments",
+          "figure": null,
+          "table": null,
+          "equation": null,
+          "label": null,
+          "bbox": null,
+          "excerpt": "The table contains invented values solely for software testing."
+        }
+      ],
+      "confidence": "high"
+    },
+    {
+      "id": "evidence_6723ce29875a",
+      "type": "conclusion",
+      "claim": "The fixture links attention to queries, keys, and values.",
+      "sources": [
+        {
+          "source_type": "paragraph",
+          "source_id": "para_pdf_00002",
+          "page": 2,
+          "section": null,
+          "figure": null,
+          "table": null,
+          "equation": null,
+          "label": null,
+          "bbox": null,
+          "excerpt": "Attention connects queries, keys, and values."
+        }
+      ],
+      "confidence": "medium"
+    }
+  ],
+  "edges": [
+    {
+      "source_id": "evidence_38e5dbdebe5f",
+      "target_id": "evidence_d95a34ac8471",
+      "relation": "implements"
+    },
+    {
+      "source_id": "evidence_f918ef30ed37",
+      "target_id": "evidence_38e5dbdebe5f",
+      "relation": "validates"
+    },
+    {
+      "source_id": "evidence_2aaf4548dfbf",
+      "target_id": "evidence_f918ef30ed37",
+      "relation": "qualifies"
+    }
+  ]
+}

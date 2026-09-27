@@ -1,0 +1,18 @@
+{
+  "canvas": {"width_in": 13.333, "height_in": 7.5},
+  "colors": {
+    "ink": "#0F172A",
+    "muted": "#475569",
+    "accent": "#2563EB",
+    "positive": "#16A34A",
+    "warning": "#D97706",
+    "background": "#FFFFFF"
+  },
+  "type": {
+    "title_pt": 28,
+    "body_pt": 18,
+    "caption_pt": 11,
+    "minimum_pt": 10
+  }
+}
+

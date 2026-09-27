@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0",
+  "evaluations": [
+    {
+      "slide_id": "S01",
+      "claim_evidence": "entailed",
+      "claim_evidence_rationale": "问题证据直接说明序列建模需求推动以 Attention 为核心的架构。",
+      "evidence_ids": ["evidence_d95a34ac8471"],
+      "claim_strength": "calibrated",
+      "claim_strength_rationale": "页面没有把动机夸大为唯一原因或普遍结论。",
+      "dependencies": []
+    },
+    {
+      "slide_id": "S02",
+      "claim_evidence": "entailed",
+      "claim_evidence_rationale": "证据明确连接 Query、Key 与 Value。",
+      "evidence_ids": ["evidence_38e5dbdebe5f"],
+      "claim_strength": "calibrated",
+      "claim_strength_rationale": "措辞与方法描述强度一致。",
+      "dependencies": [
+        {
+          "concept": "Attention 的架构动机",
+          "prerequisite_slide_ids": ["S01"],
+          "required": true,
+          "rationale": "先说明为什么需要 Attention，再进入 QKV 机制。"
+        }
+      ]
+    },
+    {
+      "slide_id": "S03",
+      "claim_evidence": "entailed",
+      "claim_evidence_rationale": "公式证据与页面给出的 Attention 表达式一致。",
+      "evidence_ids": ["evidence_49c833ade712"],
+      "claim_strength": "calibrated",
+      "claim_strength_rationale": "页面只陈述 fixture 中给出的计算关系。",
+      "dependencies": [
+        {
+          "concept": "Query、Key 与 Value",
+          "prerequisite_slide_ids": ["S02"],
+          "required": true,
+          "rationale": "理解公式前需要知道三个输入角色。"
+        }
+      ]
+    },
+    {
+      "slide_id": "S04",
+      "claim_evidence": "entailed",
+      "claim_evidence_rationale": "实验结果证据直接包含 11.0 与 10.0。",
+      "evidence_ids": ["evidence_f918ef30ed37"],
+      "claim_strength": "calibrated",
+      "claim_strength_rationale": "仅比较 fixture 分数，没有泛化为科研结论。",
+      "dependencies": []
+    },
+    {
+      "slide_id": "S05",
+      "claim_evidence": "entailed",
+      "claim_evidence_rationale": "限制证据明确说明数值仅为软件测试构造，结果证据提供被限定的对象。",
+      "evidence_ids": ["evidence_2aaf4548dfbf", "evidence_f918ef30ed37"],
+      "claim_strength": "calibrated",
+      "claim_strength_rationale": "页面以明确否定科研外推的方式保持证据边界。",
+      "dependencies": [
+        {
+          "concept": "fixture 测试分数",
+          "prerequisite_slide_ids": ["S04"],
+          "required": true,
+          "rationale": "限制判断针对上一页展示的测试分数。"
+        }
+      ]
+    },
+    {
+      "slide_id": "S06",
+      "claim_evidence": "entailed",
+      "claim_evidence_rationale": "结论和限制证据共同支持机制总结及不得外推测试分数。",
+      "evidence_ids": ["evidence_6723ce29875a", "evidence_2aaf4548dfbf"],
+      "claim_strength": "calibrated",
+      "claim_strength_rationale": "结论限定在 fixture 支持的机制与测试边界内。",
+      "dependencies": [
+        {
+          "concept": "QKV 信息交互与测试边界",
+          "prerequisite_slide_ids": ["S02", "S05"],
+          "required": true,
+          "rationale": "总结依赖前文的方法解释和限制说明。"
+        }
+      ]
+    }
+  ]
+}

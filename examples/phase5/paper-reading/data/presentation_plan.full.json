@@ -1,0 +1,137 @@
+{
+  "schema_version": "1.1",
+  "paper_id": "attention-is-all-you-need-277a3557ef",
+  "mode": "paper-reading",
+  "language": "zh-CN",
+  "language_profile": "zh_cn_bilingual_terms",
+  "presentation": {
+    "language": "zh-CN",
+    "terminology_mode": "bilingual",
+    "preserve_source_visual_language": true,
+    "translate_generic_labels": true,
+    "translate_speaker_notes": true
+  },
+  "title": "注意力序列建模：测试样例讲解",
+  "target_audience": "熟悉机器学习基础的研究生组会听众",
+  "units": [
+    {
+      "unit_id": "unit_3c520371e1ae",
+      "order": 1,
+      "role": "problem",
+      "section": "问题定义",
+      "question": "什么建模需求推动了这一架构设计？",
+      "main_claim": "序列建模需求推动架构将注意力机制（Attention）作为核心运算。",
+      "evidence_ids": [
+        "evidence_d95a34ac8471"
+      ],
+      "importance": 5,
+      "estimated_seconds": 55,
+      "rationale": "听众需要先理解序列建模问题，再进入架构设计。",
+      "transition_intent": "从问题背景转向 Attention 的核心交互机制。"
+    },
+    {
+      "unit_id": "unit_0725b1f8898e",
+      "order": 2,
+      "role": "core_insight",
+      "section": "核心思想",
+      "question": "样例中的 Attention 依赖什么信息交互？",
+      "main_claim": "注意力模块通过查询（Query）、键（Key）和值（Value）建立信息交互。",
+      "evidence_ids": [
+        "evidence_38e5dbdebe5f"
+      ],
+      "importance": 5,
+      "estimated_seconds": 65,
+      "rationale": "Query、Key 与 Value 的关系是理解样例的核心。",
+      "transition_intent": "把概念关系落实到 Attention Equation。"
+    },
+    {
+      "unit_id": "unit_920898ab9eec",
+      "order": 3,
+      "role": "method_overview",
+      "section": "方法原理",
+      "question": "Attention 如何完成一次计算？",
+      "main_claim": "样例将注意力计算写为 Attention(Q,K,V)=softmax(QK^T)V。",
+      "evidence_ids": [
+        "evidence_49c833ade712"
+      ],
+      "importance": 5,
+      "estimated_seconds": 80,
+      "rationale": "公式将 Query-Key 匹配与 Value 聚合过程具体化。",
+      "transition_intent": "用结果表检查样例是否提供了量化支持。"
+    },
+    {
+      "unit_id": "unit_7877c5016141",
+      "order": 4,
+      "role": "experiments",
+      "section": "实验结果",
+      "question": "测试样例报告了什么量化结果？",
+      "main_claim": "样例模型得分为 11.0，高于基线的 10.0。",
+      "evidence_ids": [
+        "evidence_f918ef30ed37"
+      ],
+      "importance": 4,
+      "estimated_seconds": 65,
+      "rationale": "这是 fixture 中唯一的量化比较，需要保留原始精度。",
+      "transition_intent": "在得出结论前先说明这组数值的证据边界。"
+    },
+    {
+      "unit_id": "unit_6ccd1c396bc3",
+      "order": 5,
+      "role": "analysis",
+      "section": "结果分析",
+      "question": "应该如何解读这组量化比较？",
+      "main_claim": "这组量化比较只能作为软件测试数据解读。",
+      "evidence_ids": [
+        "evidence_f918ef30ed37",
+        "evidence_2aaf4548dfbf"
+      ],
+      "importance": 3,
+      "estimated_seconds": 45,
+      "rationale": "该分析把结果与证据限制直接关联起来。",
+      "transition_intent": "进一步明确测试数值不能支持科研结论。"
+    },
+    {
+      "unit_id": "unit_5cbb71be56f5",
+      "order": 6,
+      "role": "limitations",
+      "section": "批判性分析",
+      "question": "这些结果数值能否作为科研证据？",
+      "main_claim": "结果数值仅为软件测试而构造，不能支持科研结论。",
+      "evidence_ids": [
+        "evidence_2aaf4548dfbf",
+        "evidence_f918ef30ed37"
+      ],
+      "importance": 5,
+      "estimated_seconds": 40,
+      "rationale": "明确免责声明可以防止把 fixture 误读为真实科研结果。",
+      "transition_intent": "最后只保留证据真正支持的概念结论。"
+    },
+    {
+      "unit_id": "unit_4f796739adc3",
+      "order": 7,
+      "role": "takeaway",
+      "section": "核心结论",
+      "question": "听众最终应该记住什么？",
+      "main_claim": "样例支持 Attention 的信息交互机制，测试分数不构成科研结论。",
+      "evidence_ids": [
+        "evidence_6723ce29875a",
+        "evidence_2aaf4548dfbf"
+      ],
+      "importance": 5,
+      "estimated_seconds": 40,
+      "rationale": "结尾只重申证据支持的核心机制。",
+      "transition_intent": "结束汇报。"
+    }
+  ],
+  "estimated_total_seconds": 390,
+  "coverage_gaps": [
+    "research gap"
+  ],
+  "compression": null,
+  "provenance": {
+    "provider": "json-storyline",
+    "model": "offline-fixture",
+    "prompt_version": "storyline-v2-zh-cn-bilingual-terms",
+    "input_fingerprint": "af20d1fe6bc1476027c51529daa25747e996b58a79b887c24728a449119cdd94"
+  }
+}

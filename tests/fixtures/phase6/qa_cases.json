@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "cases": [
+    {
+      "case_id": "unsupported-number",
+      "slide_id": "S01",
+      "mutation": "append_body",
+      "value": "未经来源支持的结果为 99.9。",
+      "expected_code": "UNSUPPORTED_NUMBER",
+      "repairability": "none"
+    },
+    {
+      "case_id": "safe-title-punctuation",
+      "slide_id": "S01",
+      "mutation": "append_title",
+      "value": "。",
+      "expected_code": "TITLE_TRAILING_PUNCTUATION",
+      "repairability": "automatic"
+    },
+    {
+      "case_id": "citation-source-drift",
+      "slide_id": "S01",
+      "mutation": "replace_citation_source",
+      "value": "invented_source",
+      "expected_code": "CITATION_SOURCE_MISMATCH",
+      "repairability": "none"
+    }
+  ]
+}

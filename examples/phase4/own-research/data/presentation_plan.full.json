@@ -1,0 +1,111 @@
+{
+  "schema_version": "1.1",
+  "paper_id": "attention-is-all-you-need-277a3557ef",
+  "mode": "own-research",
+  "language": "zh-en",
+  "title": "Our Attention-based Sequence Modeling Fixture",
+  "target_audience": "Research progress review",
+  "units": [
+    {
+      "unit_id": "unit_9e564cc37877",
+      "order": 1,
+      "role": "problem",
+      "section": "Problem",
+      "question": "What problem motivates our design?",
+      "main_claim": "Sequence modeling motivates an architecture centered on attention operations.",
+      "evidence_ids": [
+        "evidence_d95a34ac8471"
+      ],
+      "importance": 5,
+      "estimated_seconds": 50,
+      "rationale": "The problem establishes the need for the design.",
+      "transition_intent": "Introduce our core interaction mechanism."
+    },
+    {
+      "unit_id": "unit_aa29d07adaa5",
+      "order": 2,
+      "role": "contributions",
+      "section": "Our Idea",
+      "question": "What interaction does our fixture emphasize?",
+      "main_claim": "Our fixture connects queries, keys, and values through attention.",
+      "evidence_ids": [
+        "evidence_38e5dbdebe5f"
+      ],
+      "importance": 5,
+      "estimated_seconds": 60,
+      "rationale": "The contribution statement identifies the central design.",
+      "transition_intent": "Explain the mathematical form of the design."
+    },
+    {
+      "unit_id": "unit_23e9be3abd66",
+      "order": 3,
+      "role": "method_overview",
+      "section": "Method",
+      "question": "How do we express the attention operation?",
+      "main_claim": "The fixture defines attention as Attention(Q,K,V)=softmax(QK^T)V.",
+      "evidence_ids": [
+        "evidence_49c833ade712"
+      ],
+      "importance": 5,
+      "estimated_seconds": 80,
+      "rationale": "The equation grounds the method explanation.",
+      "transition_intent": "Evaluate the fixture comparison."
+    },
+    {
+      "unit_id": "unit_5794ab56ee00",
+      "order": 4,
+      "role": "experiments",
+      "section": "Evidence",
+      "question": "What result does our fixture contain?",
+      "main_claim": "The fixture model scores 11.0 versus 10.0 for the fixture baseline.",
+      "evidence_ids": [
+        "evidence_f918ef30ed37"
+      ],
+      "importance": 4,
+      "estimated_seconds": 60,
+      "rationale": "The comparison is the available quantitative evidence.",
+      "transition_intent": "State the evidence limitation."
+    },
+    {
+      "unit_id": "unit_3d818af8a50c",
+      "order": 5,
+      "role": "limitations",
+      "section": "Limitations",
+      "question": "What limitation prevents a scientific conclusion?",
+      "main_claim": "The result values are invented solely for software testing.",
+      "evidence_ids": [
+        "evidence_2aaf4548dfbf"
+      ],
+      "importance": 5,
+      "estimated_seconds": 40,
+      "rationale": "The review must not overclaim fixture results.",
+      "transition_intent": "Conclude with the supported concept."
+    },
+    {
+      "unit_id": "unit_9ccc3bf96c70",
+      "order": 6,
+      "role": "conclusion",
+      "section": "Conclusion",
+      "question": "What is the supported conclusion?",
+      "main_claim": "The fixture links attention to queries, keys, and values.",
+      "evidence_ids": [
+        "evidence_6723ce29875a"
+      ],
+      "importance": 5,
+      "estimated_seconds": 40,
+      "rationale": "The conclusion stays within the available evidence.",
+      "transition_intent": "End the presentation."
+    }
+  ],
+  "estimated_total_seconds": 330,
+  "coverage_gaps": [
+    "motivation or gap"
+  ],
+  "compression": null,
+  "provenance": {
+    "provider": "json-storyline",
+    "model": "offline-fixture",
+    "prompt_version": "storyline-v1",
+    "input_fingerprint": "7cee3e97a60d122b70b9ad70a0e6c9f26a634f8a328fee654585a9236e909a22"
+  }
+}

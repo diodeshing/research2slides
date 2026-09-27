@@ -1,0 +1,408 @@
+{
+  "$defs": {
+    "PresentationMode": {
+      "enum": [
+        "paper-reading",
+        "own-research"
+      ],
+      "title": "PresentationMode",
+      "type": "string"
+    },
+    "QAArtifactPaths": {
+      "additionalProperties": false,
+      "properties": {
+        "pdf": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pdf"
+        },
+        "pptx": {
+          "title": "Pptx",
+          "type": "string"
+        },
+        "preview_dir": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Preview Dir"
+        },
+        "targeted_review_pptx": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Targeted Review Pptx"
+        }
+      },
+      "required": [
+        "pptx"
+      ],
+      "title": "QAArtifactPaths",
+      "type": "object"
+    },
+    "QACategory": {
+      "enum": [
+        "factual",
+        "storyline",
+        "visual",
+        "presentation"
+      ],
+      "title": "QACategory",
+      "type": "string"
+    },
+    "QACategoryResult": {
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "$ref": "#/$defs/QACategory"
+        },
+        "checks_run": {
+          "minimum": 1,
+          "title": "Checks Run",
+          "type": "integer"
+        },
+        "issue_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Issue Ids",
+          "type": "array"
+        },
+        "status": {
+          "$ref": "#/$defs/QAStatus"
+        }
+      },
+      "required": [
+        "category",
+        "status",
+        "checks_run"
+      ],
+      "title": "QACategoryResult",
+      "type": "object"
+    },
+    "QAIssue": {
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "$ref": "#/$defs/QACategory"
+        },
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "field_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Field Path"
+        },
+        "issue_id": {
+          "title": "Issue Id",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "repairability": {
+          "$ref": "#/$defs/Repairability",
+          "default": "manual"
+        },
+        "severity": {
+          "$ref": "#/$defs/QASeverity"
+        },
+        "slide_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Slide Ids",
+          "type": "array"
+        },
+        "source_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Source Ids",
+          "type": "array"
+        },
+        "suggested_action": {
+          "title": "Suggested Action",
+          "type": "string"
+        }
+      },
+      "required": [
+        "issue_id",
+        "category",
+        "code",
+        "severity",
+        "message",
+        "suggested_action"
+      ],
+      "title": "QAIssue",
+      "type": "object"
+    },
+    "QAIteration": {
+      "additionalProperties": false,
+      "properties": {
+        "actions": {
+          "items": {
+            "$ref": "#/$defs/QARepairAction"
+          },
+          "title": "Actions",
+          "type": "array"
+        },
+        "issue_count_after": {
+          "minimum": 0,
+          "title": "Issue Count After",
+          "type": "integer"
+        },
+        "issue_count_before": {
+          "minimum": 0,
+          "title": "Issue Count Before",
+          "type": "integer"
+        },
+        "iteration": {
+          "minimum": 1,
+          "title": "Iteration",
+          "type": "integer"
+        },
+        "repaired_slide_numbers": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Repaired Slide Numbers",
+          "type": "array"
+        }
+      },
+      "required": [
+        "iteration",
+        "issue_count_before",
+        "issue_count_after"
+      ],
+      "title": "QAIteration",
+      "type": "object"
+    },
+    "QAProvenance": {
+      "additionalProperties": false,
+      "properties": {
+        "checks": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Checks",
+          "type": "array"
+        },
+        "input_fingerprint": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Input Fingerprint",
+          "type": "string"
+        },
+        "qa_version": {
+          "title": "Qa Version",
+          "type": "string"
+        },
+        "render_backend": {
+          "title": "Render Backend",
+          "type": "string"
+        }
+      },
+      "required": [
+        "qa_version",
+        "input_fingerprint",
+        "render_backend",
+        "checks"
+      ],
+      "title": "QAProvenance",
+      "type": "object"
+    },
+    "QARepairAction": {
+      "additionalProperties": false,
+      "properties": {
+        "action_id": {
+          "title": "Action Id",
+          "type": "string"
+        },
+        "after": {
+          "title": "After",
+          "type": "string"
+        },
+        "before": {
+          "title": "Before",
+          "type": "string"
+        },
+        "evidence_preserved": {
+          "const": true,
+          "default": true,
+          "title": "Evidence Preserved",
+          "type": "boolean"
+        },
+        "field_path": {
+          "title": "Field Path",
+          "type": "string"
+        },
+        "issue_id": {
+          "title": "Issue Id",
+          "type": "string"
+        },
+        "slide_id": {
+          "title": "Slide Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "action_id",
+        "issue_id",
+        "slide_id",
+        "field_path",
+        "before",
+        "after"
+      ],
+      "title": "QARepairAction",
+      "type": "object"
+    },
+    "QASeverity": {
+      "enum": [
+        "error",
+        "warning",
+        "info"
+      ],
+      "title": "QASeverity",
+      "type": "string"
+    },
+    "QAStatus": {
+      "enum": [
+        "pass",
+        "pass_with_warnings",
+        "fail"
+      ],
+      "title": "QAStatus",
+      "type": "string"
+    },
+    "Repairability": {
+      "enum": [
+        "automatic",
+        "manual",
+        "none"
+      ],
+      "title": "Repairability",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "artifacts": {
+      "$ref": "#/$defs/QAArtifactPaths"
+    },
+    "categories": {
+      "items": {
+        "$ref": "#/$defs/QACategoryResult"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "title": "Categories",
+      "type": "array"
+    },
+    "issues": {
+      "items": {
+        "$ref": "#/$defs/QAIssue"
+      },
+      "title": "Issues",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "manual_review_required": {
+      "title": "Manual Review Required",
+      "type": "boolean"
+    },
+    "mode": {
+      "$ref": "#/$defs/PresentationMode"
+    },
+    "paper_id": {
+      "title": "Paper Id",
+      "type": "string"
+    },
+    "provenance": {
+      "$ref": "#/$defs/QAProvenance"
+    },
+    "repairs": {
+      "items": {
+        "$ref": "#/$defs/QAIteration"
+      },
+      "title": "Repairs",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "slide_count": {
+      "exclusiveMinimum": 0,
+      "title": "Slide Count",
+      "type": "integer"
+    },
+    "status": {
+      "$ref": "#/$defs/QAStatus"
+    },
+    "theme": {
+      "enum": [
+        "conference-minimal",
+        "group-meeting"
+      ],
+      "title": "Theme",
+      "type": "string"
+    }
+  },
+  "required": [
+    "paper_id",
+    "mode",
+    "theme",
+    "status",
+    "slide_count",
+    "categories",
+    "artifacts",
+    "manual_review_required",
+    "provenance"
+  ],
+  "title": "QualityReport",
+  "type": "object"
+}

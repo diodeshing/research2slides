@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "sources": [
+    {
+      "source_id": "source_pdf",
+      "role": "paper_pdf",
+      "path": "D:\\workspace_codex\\projects\\research2slides\\tests\\fixtures\\attention_is_all_you_need\\paper.pdf",
+      "sha256": "e68464371e25350b8e58d02ada53aab6bc20ff194c83283364ca8631e1a1cdcb",
+      "size_bytes": 1166
+    },
+    {
+      "source_id": "source_latex",
+      "role": "latex_archive",
+      "path": "D:\\workspace_codex\\projects\\research2slides\\tests\\fixtures\\attention_is_all_you_need\\source.zip",
+      "sha256": "fe22b864ab3b59972fbb5509be6355ae6ed570982e52741c0a9e6dded22ee7a8",
+      "size_bytes": 1171
+    }
+  ],
+  "combined_sha256": "277a3557ef8065317f175d5cc813e8b2c7a965408bc658daded3dc8ef0602359"
+}

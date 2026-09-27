@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "paper_id": "attention-is-all-you-need-277a3557ef",
+  "assets": [
+    {
+      "asset_id": "asset_1a3be26c450a",
+      "type": "figure",
+      "origin": "latex_vector",
+      "priority": 1,
+      "source_path": "figures/architecture.svg",
+      "output_path": "assets/figures/fig_001.svg",
+      "sha256": "4772edcc1f433a78380b6ee11778fa049b401486c47d98a7a3b48652ccb7816c",
+      "page": null,
+      "number": "1",
+      "caption": "Fixture diagram of an encoder and decoder flow.",
+      "related_section": "sec_tex_002",
+      "source_label": "fig:architecture",
+      "media_type": "image/svg+xml"
+    }
+  ],
+  "priority_policy": [
+    "latex_vector",
+    "latex_raster",
+    "pdf_embedded",
+    "pdf_crop"
+  ]
+}

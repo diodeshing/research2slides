@@ -1,0 +1,77 @@
+{
+  "$defs": {
+    "SourceFile": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "title": "Path",
+          "type": "string"
+        },
+        "role": {
+          "$ref": "#/$defs/SourceRole"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "role",
+        "path",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "SourceFile",
+      "type": "object"
+    },
+    "SourceRole": {
+      "enum": [
+        "paper_pdf",
+        "latex_archive",
+        "latex_directory",
+        "supplement"
+      ],
+      "title": "SourceRole",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "combined_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Combined Sha256",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/SourceFile"
+      },
+      "minItems": 1,
+      "title": "Sources",
+      "type": "array"
+    }
+  },
+  "required": [
+    "sources",
+    "combined_sha256"
+  ],
+  "title": "SourceManifest",
+  "type": "object"
+}

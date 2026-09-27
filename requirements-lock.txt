@@ -1,0 +1,8 @@
+# Reproducible Phase 1 environment tested on 2026-09-25.
+jsonschema==4.26.0
+Pillow==12.3.0
+pydantic==2.13.4
+PyMuPDF==1.28.2
+pypdf==6.15.0
+pytest==9.1.1
+typer==0.25.1

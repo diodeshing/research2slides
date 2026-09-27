@@ -1,0 +1,107 @@
+{
+  "schema_version": "1.0",
+  "claims": [
+    {
+      "category": "problem",
+      "type": "problem",
+      "claim": "The fixture explores treating an image as a sequence of patches.",
+      "source_refs": [
+        {
+          "source_id": "para_tex_00002",
+          "excerpt": "The synthetic document treats an image as a sequence of patches for test coverage."
+        }
+      ],
+      "confidence": "high"
+    },
+    {
+      "category": "central_insight",
+      "type": "contribution",
+      "claim": "Image patches are represented as a sequence entering a transformer.",
+      "source_refs": [
+        {
+          "source_id": "fig_001",
+          "excerpt": "Fixture raster showing image patches entering a transformer."
+        }
+      ],
+      "confidence": "high"
+    },
+    {
+      "category": "method",
+      "type": "method",
+      "claim": "Each fixture patch is mapped into a token.",
+      "source_refs": [
+        {
+          "source_id": "para_tex_00003",
+          "excerpt": "Each fixture patch is mapped into a token without claiming an experimental result."
+        }
+      ],
+      "confidence": "high"
+    },
+    {
+      "category": "method",
+      "type": "equation",
+      "claim": "The patch sequence includes a class token and positional embedding.",
+      "source_refs": [
+        {
+          "source_id": "eq_001",
+          "excerpt": "z_0=[x_{class};x_p^1E;x_p^2E]+E_{pos}"
+        }
+      ],
+      "confidence": "medium"
+    },
+    {
+      "category": "experiment_findings",
+      "type": "experimental_result",
+      "claim": "Fixture B reports 71.0 compared with 70.0 for Fixture A.",
+      "source_refs": [
+        {
+          "source_id": "table_001",
+          "excerpt": "Fixture comparison for integration testing."
+        }
+      ],
+      "confidence": "high"
+    },
+    {
+      "category": "limitations",
+      "type": "limitation",
+      "claim": "The evaluation values are invented and cannot be presented as paper evidence.",
+      "source_refs": [
+        {
+          "source_id": "para_tex_00004",
+          "excerpt": "All values in this fixture are invented and must not be presented as paper evidence."
+        }
+      ],
+      "confidence": "high"
+    },
+    {
+      "category": "audience_takeaways",
+      "type": "conclusion",
+      "claim": "The fixture maps image patches to tokens.",
+      "source_refs": [
+        {
+          "source_id": "para_pdf_00002",
+          "excerpt": "Patches are mapped to tokens."
+        }
+      ],
+      "confidence": "high"
+    }
+  ],
+  "relations": [
+    {
+      "source_claim_index": 2,
+      "target_claim_index": 0,
+      "relation": "implements"
+    },
+    {
+      "source_claim_index": 4,
+      "target_claim_index": 1,
+      "relation": "validates"
+    },
+    {
+      "source_claim_index": 5,
+      "target_claim_index": 4,
+      "relation": "qualifies"
+    }
+  ]
+}
+

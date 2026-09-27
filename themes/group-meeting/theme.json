@@ -1,0 +1,20 @@
+{
+  "name": "group-meeting",
+  "fontFamily": "Microsoft YaHei",
+  "fontFallbacks": ["Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", "Arial"],
+  "equationFontFamily": "Cambria Math",
+  "background": "F7F8FC",
+  "surface": "FFFFFF",
+  "text": "17213B",
+  "muted": "667085",
+  "accent": "3557E5",
+  "accentSoft": "E9EDFF",
+  "secondary": "008C95",
+  "warning": "B54708",
+  "titleSize": 27,
+  "technicalTitleSize": 11,
+  "bodySize": 18,
+  "takeawaySize": 16,
+  "citationSize": 10,
+  "lineWidth": 1.5
+}

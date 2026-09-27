@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "claims": [
+    {
+      "category": "problem",
+      "type": "problem",
+      "claim": "大规模 MoE 训练需要同时控制推理效率、训练成本与跨节点通信开销。",
+      "source_refs": [{"source_id": "para_tex_00027", "excerpt": "we design the DualPipe algorithm for efficient pipeline parallelism, which has fewer pipeline bubbles and hides most of the communication during training"}],
+      "confidence": "high"
+    },
+    {
+      "category": "contributions",
+      "type": "contribution",
+      "claim": "DeepSeek-V3 采用 671B 总参数、每个 token 激活 37B 参数的 MoE 配置。",
+      "source_refs": [{"source_id": "para_tex_00124", "excerpt": "comprises 671B total parameters, of which 37B are activated for each token"}],
+      "confidence": "high"
+    },
+    {
+      "category": "method",
+      "type": "method",
+      "claim": "基础架构沿用 Multi-head Latent Attention 与 DeepSeekMoE，以兼顾推理效率和训练经济性。",
+      "source_refs": [{"source_id": "para_tex_00038", "excerpt": "featured by Multi-head Latent Attention~()~dsvii for efficient inference and ~deepseekmoe for economical training"}],
+      "confidence": "high"
+    },
+    {
+      "category": "central_insight",
+      "type": "method",
+      "claim": "训练目标增加 Auxiliary-Loss-Free Load Balancing 与 Multi-Token Prediction 两项关键策略。",
+      "source_refs": [{"source_id": "para_tex_00032", "excerpt": "we pioneer an auxiliary-loss-free strategy for load balancing"}, {"source_id": "para_tex_00032", "excerpt": "We investigate a Multi-Token Prediction (MTP) objective"}],
+      "confidence": "high"
+    },
+    {
+      "category": "design_rationale",
+      "type": "method",
+      "claim": "FP8 混合精度框架通过低精度计算与存储加速训练并减少显存占用。",
+      "source_refs": [{"source_id": "para_tex_00027", "excerpt": "Through the support for FP8 computation and storage, we achieve both accelerated training and reduced GPU memory usage."}],
+      "confidence": "high"
+    },
+    {
+      "category": "experiment_findings",
+      "type": "experimental_result",
+      "claim": "完整训练包含预训练、上下文扩展和后训练，共消耗 2.788M H800 GPU hours。",
+      "source_refs": [{"source_id": "para_tex_00030", "excerpt": "costs only 2.788M GPU hours for its full training"}],
+      "confidence": "high"
+    },
+    {
+      "category": "experiment_findings",
+      "type": "experimental_result",
+      "claim": "两阶段上下文扩展后，模型在 Needle In A Haystack 测试中保持至 128K 上下文的稳健表现。",
+      "source_refs": [{"source_id": "para_tex_00128", "excerpt": "demonstrating consistent robustness across context window lengths up to 128K"}],
+      "confidence": "high"
+    },
+    {
+      "category": "ablation_findings",
+      "type": "ablation_result",
+      "claim": "MTP 消融显示该策略在多数评测基准上持续改善模型表现。",
+      "source_refs": [{"source_id": "table_004", "excerpt": "The MTP strategy consistently enhances the model performance on most of the evaluation benchmarks."}],
+      "confidence": "high"
+    },
+    {
+      "category": "ablation_findings",
+      "type": "ablation_result",
+      "claim": "无辅助损失负载均衡在多数评测基准上优于纯辅助损失方案。",
+      "source_refs": [{"source_id": "table_005", "excerpt": "the auxiliary-loss-free strategy consistently achieves better model performance on most of the evaluation benchmarks."}],
+      "confidence": "high"
+    },
+    {
+      "category": "limitations",
+      "type": "limitation",
+      "claim": "高效推理所需的部署单元仍然较大，会给小规模团队带来负担。",
+      "source_refs": [{"source_id": "para_tex_00194", "excerpt": "the recommended deployment unit for is relatively large, which might pose a burden for small-sized teams"}],
+      "confidence": "high"
+    },
+    {
+      "category": "audience_takeaways",
+      "type": "conclusion",
+      "claim": "DeepSeek-V3 的系统性优势来自稀疏架构、训练目标、低精度计算与系统工程的联合设计。",
+      "source_refs": [{"source_id": "para_tex_00193", "excerpt": "The training of is cost-effective due to the support of FP8 training and meticulous engineering optimizations."}],
+      "confidence": "high"
+    }
+  ],
+  "relations": [
+    {"source_claim_index": 2, "target_claim_index": 0, "relation": "implements"},
+    {"source_claim_index": 3, "target_claim_index": 0, "relation": "implements"},
+    {"source_claim_index": 4, "target_claim_index": 0, "relation": "implements"},
+    {"source_claim_index": 5, "target_claim_index": 4, "relation": "validates"},
+    {"source_claim_index": 7, "target_claim_index": 3, "relation": "validates"},
+    {"source_claim_index": 8, "target_claim_index": 3, "relation": "validates"},
+    {"source_claim_index": 9, "target_claim_index": 10, "relation": "qualifies"}
+  ]
+}

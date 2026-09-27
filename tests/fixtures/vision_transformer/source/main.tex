@@ -1,0 +1,36 @@
+\documentclass{article}
+\title{An Image is Worth 16x16 Words}
+\author{Alexey Dosovitskiy \and Lucas Beyer}
+\begin{document}
+\maketitle
+\begin{abstract}
+This compact fixture represents a public Vision Transformer paper for parser integration tests.
+\end{abstract}
+\section{Introduction}
+The synthetic document treats an image as a sequence of patches for test coverage.
+\section{Method}
+\begin{figure}
+\centering
+\includegraphics{figures/patches.png}
+\caption{Fixture raster showing image patches entering a transformer.}
+\label{fig:patches}
+\end{figure}
+\subsection{Patch Embeddings}
+Each fixture patch is mapped into a token without claiming an experimental result.
+\begin{equation}
+z_0=[x_{class};x_p^1E;x_p^2E]+E_{pos}
+\label{eq:embedding}
+\end{equation}
+\section{Evaluation}
+\begin{table}
+\caption{Fixture comparison for integration testing.}
+\label{tab:comparison}
+\begin{tabular}{lc}
+Model & Accuracy \\
+Fixture A & 70.0 \\
+Fixture B & 71.0
+\end{tabular}
+\end{table}
+All values in this fixture are invented and must not be presented as paper evidence.
+\end{document}
+

@@ -1,0 +1,158 @@
+{
+  "$defs": {
+    "DraftClaim": {
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "enum": [
+            "problem",
+            "importance",
+            "existing_approaches",
+            "gap",
+            "central_insight",
+            "contributions",
+            "method",
+            "design_rationale",
+            "experiment_findings",
+            "ablation_findings",
+            "limitations",
+            "audience_takeaways"
+          ],
+          "title": "Category",
+          "type": "string"
+        },
+        "claim": {
+          "minLength": 1,
+          "title": "Claim",
+          "type": "string"
+        },
+        "confidence": {
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "title": "Confidence",
+          "type": "string"
+        },
+        "source_refs": {
+          "items": {
+            "$ref": "#/$defs/DraftEvidenceRef"
+          },
+          "minItems": 1,
+          "title": "Source Refs",
+          "type": "array"
+        },
+        "type": {
+          "enum": [
+            "problem",
+            "motivation",
+            "gap",
+            "contribution",
+            "method",
+            "equation",
+            "dataset",
+            "metric",
+            "experimental_result",
+            "ablation_result",
+            "limitation",
+            "conclusion"
+          ],
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "category",
+        "type",
+        "claim",
+        "source_refs",
+        "confidence"
+      ],
+      "title": "DraftClaim",
+      "type": "object"
+    },
+    "DraftEvidenceRef": {
+      "additionalProperties": false,
+      "properties": {
+        "excerpt": {
+          "minLength": 1,
+          "title": "Excerpt",
+          "type": "string"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "excerpt"
+      ],
+      "title": "DraftEvidenceRef",
+      "type": "object"
+    },
+    "DraftRelation": {
+      "additionalProperties": false,
+      "properties": {
+        "relation": {
+          "enum": [
+            "supports",
+            "contradicts",
+            "motivates",
+            "implements",
+            "validates",
+            "qualifies"
+          ],
+          "title": "Relation",
+          "type": "string"
+        },
+        "source_claim_index": {
+          "minimum": 0,
+          "title": "Source Claim Index",
+          "type": "integer"
+        },
+        "target_claim_index": {
+          "minimum": 0,
+          "title": "Target Claim Index",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "source_claim_index",
+        "target_claim_index",
+        "relation"
+      ],
+      "title": "DraftRelation",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "claims": {
+      "items": {
+        "$ref": "#/$defs/DraftClaim"
+      },
+      "title": "Claims",
+      "type": "array"
+    },
+    "relations": {
+      "items": {
+        "$ref": "#/$defs/DraftRelation"
+      },
+      "title": "Relations",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "claims"
+  ],
+  "title": "AnalysisDraft",
+  "type": "object"
+}

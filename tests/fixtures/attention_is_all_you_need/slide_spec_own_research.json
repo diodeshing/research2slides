@@ -1,0 +1,202 @@
+{
+  "schema_version": "1.0",
+  "mode": "own-research",
+  "theme": "conference-minimal",
+  "language_profile": "zh_cn_bilingual_terms",
+  "presentation": {
+    "language": "zh-CN",
+    "terminology_mode": "bilingual",
+    "preserve_source_visual_language": true,
+    "translate_generic_labels": true,
+    "translate_speaker_notes": true
+  },
+  "slides": [
+    {
+      "unit_id": "unit_3c520371e1ae",
+      "purpose": "说明推动我们进行架构设计的序列建模问题。",
+      "question": "什么问题推动了我们的设计？",
+      "title": "序列建模需求推动 Attention 成为设计核心",
+      "title_kind": "claim",
+      "technical_title": "Problem",
+      "main_claim": "序列建模需求推动架构将注意力机制（Attention）作为核心运算。",
+      "body": [
+        "序列建模（Sequence Modeling）定义了问题背景。",
+        "注意力机制（Attention）构成当前设计方向。"
+      ],
+      "visuals": [],
+      "annotations": [],
+      "takeaway": "核心结论：我们的设计从序列建模需求出发。",
+      "evidence_ids": ["evidence_d95a34ac8471"],
+      "speaker_notes": {
+        "purpose": "说明推动我们进行架构设计的序列建模问题。",
+        "main_message": "序列建模需求推动架构将注意力机制（Attention）作为核心运算。",
+        "script": "先说明我们处理的是 Sequence Modeling 问题。这个需求决定了当前设计把 Attention 放在核心位置，本页只交代动机和设计方向。",
+        "visual_guidance": "使用克制的文字布局，先讲问题，再讲设计方向。",
+        "transition": "接下来说明我们的核心信息交互方式。",
+        "estimated_seconds": 50
+      },
+      "layout": "minimal_text"
+    },
+    {
+      "unit_id": "unit_2bdd8843b2de",
+      "purpose": "结合原始架构图说明当前样例支持的研究思路。",
+      "question": "我们的样例强调什么信息交互？",
+      "title": "我们的样例通过 Attention 连接 Query、Key 与 Value",
+      "title_kind": "claim",
+      "technical_title": "Our Idea",
+      "main_claim": "我们的样例通过 Attention 连接 Query、Key 与 Value。",
+      "body": [
+        "查询（Query）表示当前需要获取的信息。",
+        "键（Key）负责匹配，值（Value）提供聚合内容。"
+      ],
+      "visuals": [
+        {
+          "visual_id": "visual_own_s02_architecture",
+          "kind": "source_asset",
+          "source_ref": "asset_1a3be26c450a",
+          "role": "primary",
+          "treatment": "original",
+          "caption": "原始架构图保持论文中的英文标签",
+          "annotations": ["只突出 Attention 连接，不改动原图内部文字。"]
+        }
+      ],
+      "annotations": [],
+      "takeaway": "核心结论：研究思路聚焦 Query-Key-Value 交互。",
+      "evidence_ids": ["evidence_38e5dbdebe5f"],
+      "speaker_notes": {
+        "purpose": "结合原始架构图说明当前样例支持的研究思路。",
+        "main_message": "我们的样例通过 Attention 连接 Query、Key 与 Value。",
+        "script": "这一页说明样例当前强调什么。Query 表示信息需求，Key 用于匹配，Value 提供需要聚合的内容。原始 Figure 中的 Encoder 与 Decoder 等标签保持英文。",
+        "visual_guidance": "让原始 Figure 成为主要视觉，只增加一处中文解释。",
+        "transition": "下一页用 Attention Equation 解释这一交互。",
+        "estimated_seconds": 60
+      },
+      "layout": "visual_left_text_right"
+    },
+    {
+      "unit_id": "unit_920898ab9eec",
+      "purpose": "解释样例方法的数学形式。",
+      "question": "我们如何表达 Attention 计算？",
+      "title": "Attention 通过 Query-Key 匹配实现 Value 加权聚合",
+      "title_kind": "claim",
+      "technical_title": "Method",
+      "main_claim": "样例将注意力计算写为 Attention(Q,K,V)=softmax(QK^T)V。",
+      "body": [
+        "QK^T 用于计算 Query 与 Key 之间的匹配得分。",
+        "Softmax 将得分归一化为权重，并作用于 Value（V）。"
+      ],
+      "visuals": [
+        {
+          "visual_id": "visual_own_s03_equation",
+          "kind": "source_equation",
+          "source_ref": "eq_001",
+          "role": "primary",
+          "treatment": "equation",
+          "caption": "公式 1：Attention Equation",
+          "annotations": ["按得分、权重和 Value 聚合的顺序解释公式。"]
+        }
+      ],
+      "annotations": [],
+      "takeaway": "核心结论：Softmax 权重决定 Value 聚合。",
+      "evidence_ids": ["evidence_49c833ade712"],
+      "speaker_notes": {
+        "purpose": "解释样例方法的数学形式。",
+        "main_message": "样例将注意力计算写为 Attention(Q,K,V)=softmax(QK^T)V。",
+        "script": "公式从左到右解释。QK^T 形成匹配得分，Softmax 将得分转换为权重，最后这些权重作用在 V 上完成信息聚合。",
+        "visual_guidance": "使用原始公式作为唯一主要视觉，按讲解顺序突出各部分。",
+        "transition": "理解方法以后，下一页查看当前量化结果。",
+        "estimated_seconds": 80
+      },
+      "layout": "equation_focus"
+    },
+    {
+      "unit_id": "unit_7877c5016141",
+      "purpose": "按原始精度呈现现有 fixture 比较。",
+      "question": "当前样例包含什么结果？",
+      "title": "样例模型得分为 11.0，高于基线的 10.0",
+      "title_kind": "claim",
+      "technical_title": "Evidence",
+      "main_claim": "样例模型得分为 11.0，高于基线的 10.0。",
+      "body": [
+        "Fixture baseline 得分为 10.0。",
+        "Fixture model 得分为 11.0。"
+      ],
+      "visuals": [
+        {
+          "visual_id": "visual_own_s04_table",
+          "kind": "source_table",
+          "source_ref": "table_001",
+          "role": "primary",
+          "treatment": "native_table",
+          "caption": "表 1：Fixture evaluation results",
+          "annotations": ["保留两个模型名称和原始数值，不推导百分比。"],
+          "table_column_labels": ["方法", "得分"]
+        }
+      ],
+      "annotations": ["该结果仅用于测试软件流程，不构成有效科研证据。"],
+      "takeaway": "核心结论：一分差值只是一组软件测试数据。",
+      "evidence_ids": ["evidence_f918ef30ed37"],
+      "speaker_notes": {
+        "purpose": "按原始精度呈现现有 fixture 比较。",
+        "main_message": "样例模型得分为 11.0，高于基线的 10.0。",
+        "script": "这里只报告已有数值。Fixture baseline 为 10.0，Fixture model 为 11.0。我们不增加百分比，也不把它解释成真实科研提升。",
+        "visual_guidance": "使用可编辑表格，中文化通用表头，同时保留模型名称与数值。",
+        "transition": "下一页说明为什么这组结果不能支持科研结论。",
+        "estimated_seconds": 60
+      },
+      "layout": "table_focus"
+    },
+    {
+      "unit_id": "unit_4b59ce4346a5",
+      "purpose": "直接说明当前证据的限制。",
+      "question": "什么限制阻止我们得出科研结论？",
+      "title": "测试数据只能验证软件流程，不能支持科研结论",
+      "title_kind": "claim",
+      "technical_title": "Limitations",
+      "main_claim": "结果数值仅为软件测试而构造，不能支持科研结论。",
+      "body": [
+        "测试数值用于验证 table、claim 与 citation 的处理。",
+        "这些数值不能用于评价我们的研究方法。"
+      ],
+      "visuals": [],
+      "annotations": [],
+      "takeaway": "核心结论：当前量化证据不属于有效科研证据。",
+      "evidence_ids": ["evidence_2aaf4548dfbf"],
+      "speaker_notes": {
+        "purpose": "直接说明当前证据的限制。",
+        "main_message": "结果数值仅为软件测试而构造，不能支持科研结论。",
+        "script": "这一限制必须直接说明。数值只验证 pipeline 能否正确处理 table、claim 和 citation，不验证我们的研究方法。",
+        "visual_guidance": "采用最小化文字布局，不添加装饰性警告图标。",
+        "transition": "最后总结当前真正得到支持的结论。",
+        "estimated_seconds": 40
+      },
+      "layout": "minimal_text"
+    },
+    {
+      "unit_id": "unit_d8f16b94e97b",
+      "purpose": "用证据支持的概念结论结束汇报。",
+      "question": "当前证据支持什么结论？",
+      "title": "Attention 通过 Query-Key-Value 完成信息交互",
+      "title_kind": "claim",
+      "technical_title": "Conclusion",
+      "main_claim": "样例支持 Attention 的信息交互机制，测试分数不构成科研结论。",
+      "body": [
+        "Query 表示信息需求，Key 完成匹配。",
+        "Value 提供最终需要聚合的信息内容。"
+      ],
+      "visuals": [],
+      "annotations": [],
+      "takeaway": "核心结论：保留 Attention 机制，不解读测试分数。",
+      "evidence_ids": ["evidence_6723ce29875a", "evidence_2aaf4548dfbf"],
+      "speaker_notes": {
+        "purpose": "用证据支持的概念结论结束汇报。",
+        "main_message": "样例支持 Attention 的信息交互机制，测试分数不构成科研结论。",
+        "script": "结论只保留证据支持的内容，也就是 Attention 对 Query、Key 与 Value 的连接。测试分数只用于软件验收，不进入我们的科研结论。",
+        "visual_guidance": "突出一条结论，并用一行文字说明证据边界。",
+        "transition": "结束汇报。",
+        "estimated_seconds": 40
+      },
+      "layout": "minimal_text"
+    }
+  ]
+}

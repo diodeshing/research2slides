@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0",
+  "claims": [
+    {
+      "category": "problem",
+      "type": "problem",
+      "claim": "图像分割缺少可直接从互联网规模化获取的掩码数据。",
+      "source_refs": [{"source_id": "para_tex_00014", "excerpt": "masks are not naturally abundant and thus we need an alternative strategy"}],
+      "confidence": "high"
+    },
+    {
+      "category": "central_insight",
+      "type": "contribution",
+      "claim": "Promptable Segmentation 将任意分割提示映射为至少一个有效掩码，从而统一预训练与零样本迁移。",
+      "source_refs": [{"source_id": "para_tex_00012", "excerpt": "the goal is to return a valid segmentation mask given any segmentation prompt"}],
+      "confidence": "high"
+    },
+    {
+      "category": "method",
+      "type": "method",
+      "claim": "SAM 由图像编码器、提示编码器和轻量掩码解码器组成，并支持歧义提示输出多个候选掩码。",
+      "source_refs": [{"source_id": "fig_003", "excerpt": "A heavyweight image encoder outputs an image embedding that can then be efficiently queried by a variety of input prompts to produce object masks at amortized real-time speed."}],
+      "confidence": "high"
+    },
+    {
+      "category": "design_rationale",
+      "type": "method",
+      "claim": "模型设计同时满足灵活提示、摊销实时推理与歧义感知三项约束。",
+      "source_refs": [{"source_id": "para_tex_00013", "excerpt": "the model must support flexible prompts, needs to compute masks in amortized real-time to allow interactive use, and must be ambiguity-aware"}],
+      "confidence": "high"
+    },
+    {
+      "category": "contributions",
+      "type": "dataset",
+      "claim": "数据引擎依次经历辅助人工、半自动和全自动三个阶段。",
+      "source_refs": [{"source_id": "para_tex_00036", "excerpt": "The data engine has three stages: (1) a model-assisted manual annotation stage, (2) a semi-automatic stage with a mix of automatically predicted masks and model-assisted annotation, and (3) a fully automatic stage"}],
+      "confidence": "high"
+    },
+    {
+      "category": "contributions",
+      "type": "dataset",
+      "claim": "最终自动生成流程覆盖 11M 张图像并产出 1.1B 个高质量掩码。",
+      "source_refs": [{"source_id": "para_tex_00040", "excerpt": "We applied fully automatic mask generation to all 11M images in our dataset, producing a total of 1.1B high-quality masks."}],
+      "confidence": "high"
+    },
+    {
+      "category": "experiment_findings",
+      "type": "experimental_result",
+      "claim": "单前景点提示在 23 个分割数据集上产生高质量掩码，并展示多任务零样本迁移能力。",
+      "source_refs": [{"source_id": "para_tex_00017", "excerpt": "using a diverse new suite of 23 segmentation datasets, we find that produces high-quality masks from a single foreground point"}],
+      "confidence": "high"
+    },
+    {
+      "category": "ablation_findings",
+      "type": "ablation_result",
+      "claim": "消融覆盖数据引擎阶段、图像编码器规模和训练数据规模。",
+      "source_refs": [{"source_id": "fig_013", "excerpt": "Ablation studies of our data engine stages, image encoder scaling, and training data scaling."}],
+      "confidence": "high"
+    },
+    {
+      "category": "limitations",
+      "type": "limitation",
+      "claim": "SAM 仍可能遗漏细结构、产生小型断裂区域，并且重型图像编码器限制端到端实时性。",
+      "source_refs": [{"source_id": "para_tex_00084", "excerpt": "It can miss fine structures, hallucinates small disconnected components at times, and does not produce boundaries as crisply"}],
+      "confidence": "high"
+    },
+    {
+      "category": "limitations",
+      "type": "limitation",
+      "claim": "SA-1B 与对比数据集都存在非洲、拉丁美洲和加勒比地区以及低收入国家代表不足的问题。",
+      "source_refs": [{"source_id": "table_001", "excerpt": "Images from Africa, Latin America \\& Caribbean, as well as low income countries, are underrepresented in all datasets."}],
+      "confidence": "high"
+    },
+    {
+      "category": "audience_takeaways",
+      "type": "conclusion",
+      "claim": "Segment Anything 的完整贡献来自任务、模型与数据三者共同设计，而非单一模型规模。",
+      "source_refs": [{"source_id": "para_tex_00085", "excerpt": "Our principal contributions are a new task (promptable segmentation), model (), and dataset ()"}],
+      "confidence": "high"
+    }
+  ],
+  "relations": [
+    {"source_claim_index": 0, "target_claim_index": 4, "relation": "motivates"},
+    {"source_claim_index": 1, "target_claim_index": 2, "relation": "motivates"},
+    {"source_claim_index": 3, "target_claim_index": 2, "relation": "implements"},
+    {"source_claim_index": 4, "target_claim_index": 5, "relation": "implements"},
+    {"source_claim_index": 6, "target_claim_index": 2, "relation": "validates"},
+    {"source_claim_index": 7, "target_claim_index": 6, "relation": "validates"},
+    {"source_claim_index": 8, "target_claim_index": 6, "relation": "qualifies"},
+    {"source_claim_index": 9, "target_claim_index": 5, "relation": "qualifies"}
+  ]
+}

@@ -1,0 +1,281 @@
+{
+  "$defs": {
+    "CompressionInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "omitted_unit_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Omitted Unit Ids",
+          "type": "array"
+        },
+        "time_budget_seconds": {
+          "exclusiveMinimum": 0,
+          "title": "Time Budget Seconds",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "time_budget_seconds",
+        "omitted_unit_ids"
+      ],
+      "title": "CompressionInfo",
+      "type": "object"
+    },
+    "LanguageProfile": {
+      "enum": [
+        "zh_cn_bilingual_terms"
+      ],
+      "title": "LanguageProfile",
+      "type": "string"
+    },
+    "PlanProvenance": {
+      "additionalProperties": false,
+      "properties": {
+        "input_fingerprint": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Input Fingerprint",
+          "type": "string"
+        },
+        "model": {
+          "title": "Model",
+          "type": "string"
+        },
+        "prompt_version": {
+          "title": "Prompt Version",
+          "type": "string"
+        },
+        "provider": {
+          "title": "Provider",
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider",
+        "model",
+        "prompt_version",
+        "input_fingerprint"
+      ],
+      "title": "PlanProvenance",
+      "type": "object"
+    },
+    "PresentationLanguageConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "language": {
+          "const": "zh-CN",
+          "default": "zh-CN",
+          "title": "Language",
+          "type": "string"
+        },
+        "preserve_source_visual_language": {
+          "const": true,
+          "default": true,
+          "title": "Preserve Source Visual Language",
+          "type": "boolean"
+        },
+        "terminology_mode": {
+          "const": "bilingual",
+          "default": "bilingual",
+          "title": "Terminology Mode",
+          "type": "string"
+        },
+        "translate_generic_labels": {
+          "const": true,
+          "default": true,
+          "title": "Translate Generic Labels",
+          "type": "boolean"
+        },
+        "translate_speaker_notes": {
+          "const": true,
+          "default": true,
+          "title": "Translate Speaker Notes",
+          "type": "boolean"
+        }
+      },
+      "title": "PresentationLanguageConfig",
+      "type": "object"
+    },
+    "PresentationMode": {
+      "enum": [
+        "paper-reading",
+        "own-research"
+      ],
+      "title": "PresentationMode",
+      "type": "string"
+    },
+    "PresentationUnit": {
+      "additionalProperties": false,
+      "properties": {
+        "estimated_seconds": {
+          "maximum": 300,
+          "minimum": 20,
+          "title": "Estimated Seconds",
+          "type": "integer"
+        },
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "importance": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Importance",
+          "type": "integer"
+        },
+        "main_claim": {
+          "title": "Main Claim",
+          "type": "string"
+        },
+        "order": {
+          "minimum": 1,
+          "title": "Order",
+          "type": "integer"
+        },
+        "question": {
+          "title": "Question",
+          "type": "string"
+        },
+        "rationale": {
+          "title": "Rationale",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "opening",
+            "problem",
+            "background",
+            "existing_approaches",
+            "gap",
+            "core_insight",
+            "contributions",
+            "method_overview",
+            "method_component",
+            "experiments",
+            "ablation",
+            "analysis",
+            "limitations",
+            "conclusion",
+            "takeaway"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "section": {
+          "title": "Section",
+          "type": "string"
+        },
+        "transition_intent": {
+          "title": "Transition Intent",
+          "type": "string"
+        },
+        "unit_id": {
+          "title": "Unit Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "unit_id",
+        "order",
+        "role",
+        "section",
+        "question",
+        "main_claim",
+        "evidence_ids",
+        "importance",
+        "estimated_seconds",
+        "rationale",
+        "transition_intent"
+      ],
+      "title": "PresentationUnit",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "compression": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/CompressionInfo"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "coverage_gaps": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Coverage Gaps",
+      "type": "array"
+    },
+    "estimated_total_seconds": {
+      "minimum": 0,
+      "title": "Estimated Total Seconds",
+      "type": "integer"
+    },
+    "language": {
+      "const": "zh-CN",
+      "default": "zh-CN",
+      "title": "Language",
+      "type": "string"
+    },
+    "language_profile": {
+      "$ref": "#/$defs/LanguageProfile",
+      "default": "zh_cn_bilingual_terms"
+    },
+    "mode": {
+      "$ref": "#/$defs/PresentationMode"
+    },
+    "paper_id": {
+      "title": "Paper Id",
+      "type": "string"
+    },
+    "presentation": {
+      "$ref": "#/$defs/PresentationLanguageConfig"
+    },
+    "provenance": {
+      "$ref": "#/$defs/PlanProvenance"
+    },
+    "schema_version": {
+      "const": "1.1",
+      "default": "1.1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "target_audience": {
+      "title": "Target Audience",
+      "type": "string"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    },
+    "units": {
+      "items": {
+        "$ref": "#/$defs/PresentationUnit"
+      },
+      "minItems": 1,
+      "title": "Units",
+      "type": "array"
+    }
+  },
+  "required": [
+    "paper_id",
+    "mode",
+    "title",
+    "target_audience",
+    "units",
+    "estimated_total_seconds",
+    "provenance"
+  ],
+  "title": "PresentationPlan",
+  "type": "object"
+}

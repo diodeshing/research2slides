@@ -1,0 +1,65 @@
+{
+  "schema_version":"1.0","mode":"paper-reading","theme":"group-meeting","language_profile":"zh_cn_bilingual_terms",
+  "presentation":{"language":"zh-CN","terminology_mode":"bilingual","preserve_source_visual_language":true,"translate_generic_labels":true,"translate_speaker_notes":true},
+  "slides":[
+    {
+      "unit_id":"unit_531cac483f3e","purpose":"解释分割基础模型的数据瓶颈。","question":"为什么分割基础模型不能只依赖现有互联网数据？","title":"分割掩码无法从互联网自然规模化获取","title_kind":"claim","technical_title":"Segmentation Data Bottleneck","main_claim":"分割掩码无法像文本或图像一样从互联网自然获得，规模化数据成为首要瓶颈。",
+      "body":["分割监督需要像素级掩码，天然数据供给不足。","模型、任务与数据采集方式必须一起设计。"],"visuals":[],"annotations":[],"takeaway":"核心结论：数据获取方式决定分割基础模型能否扩展。","evidence_ids":["evidence_15fa874c8c69"],
+      "speaker_notes":{"purpose":"解释分割基础模型的数据瓶颈。","main_message":"分割掩码无法像文本或图像一样从互联网自然获得，规模化数据成为首要瓶颈。","script":"文本和图片可以从互联网获得大规模原始数据，但像素级分割掩码需要额外标注。论文因此不能只扩大模型，而要设计一种能够持续生产掩码的数据机制。","visual_guidance":"保持简洁，用问题与后果两层信息组织页面。","transition":"这一约束首先推动论文重新定义分割任务。","estimated_seconds":55},"layout":"minimal_text"
+    },
+    {
+      "unit_id":"unit_7102221d45c2","purpose":"说明 Promptable Segmentation 的任务定义。","question":"什么任务能够同时支持预训练与零样本迁移？","title":"Promptable Segmentation 统一预训练与零样本迁移","title_kind":"claim","technical_title":"Promptable Segmentation","main_claim":"Promptable Segmentation 要求任意提示至少产生一个有效掩码，并把提示工程带入分割。",
+      "body":["提示可以是点、框、掩码或文本等对象线索。","歧义提示允许输出多个有效候选，而不是强迫唯一答案。"],
+      "visuals":[{"visual_id":"b_ambiguity","kind":"source_asset","source_ref":"asset_8433705d3fd3","role":"primary","treatment":"original","caption":"论文原始 Figure：单个歧义点提示对应多个有效掩码","annotations":["绿色点相同，比较每列的多个合理分割结果。"]}],
+      "annotations":[],"takeaway":"核心结论：有效掩码标准让同一任务适配开放世界歧义。","evidence_ids":["evidence_067d2f1c63ab"],
+      "speaker_notes":{"purpose":"说明 Promptable Segmentation 的任务定义。","main_message":"Promptable Segmentation 要求任意提示至少产生一个有效掩码，并把提示工程带入分割。","script":"任务输入不再固定为类别标签，而是对象提示。一个点可能同时落在衣服、人物或局部区域上，因此模型输出多个合理掩码，并让下游根据场景选择。","visual_guidance":"指向相同绿色提示点，再比较同列多个掩码的合理性。","transition":"任务约束决定模型必须同时支持灵活提示、速度和歧义处理。","estimated_seconds":65},"layout":"visual_left_text_right"
+    },
+    {
+      "unit_id":"unit_0d7961b4d74c","purpose":"用原始模型图解释 SAM 的模块分工。","question":"SAM 如何处理不同提示与歧义？","title":"SAM 将图像编码与轻量提示解码分离","title_kind":"claim","technical_title":"Segment Anything Model","main_claim":"SAM 由图像编码器、提示编码器和轻量掩码解码器组成，并为歧义提示预测多个候选掩码。",
+      "body":["图像编码器为每张图像计算一次共享 embedding。","提示编码器与轻量 mask decoder 支持多次交互式查询。"],
+      "visuals":[{"visual_id":"b_model","kind":"source_asset","source_ref":"asset_097891dde9a3","role":"primary","treatment":"original","caption":"论文原始 Figure：SAM overview","annotations":["先讲共享图像 embedding，再讲不同提示如何复用它。"]}],
+      "annotations":[],"takeaway":"核心结论：昂贵图像计算只做一次，提示交互保持轻量。","evidence_ids":["evidence_a25c23a98e97","evidence_7912ea7c2e15"],
+      "speaker_notes":{"purpose":"用原始模型图解释 SAM 的模块分工。","main_message":"SAM 由图像编码器、提示编码器和轻量掩码解码器组成，并为歧义提示预测多个候选掩码。","script":"SAM 把计算拆成两部分。图像编码器先得到共享表示，之后每次新的点、框或掩码提示只经过提示编码器和轻量解码器。歧义场景通过多个候选掩码和置信度处理。","visual_guidance":"按 Image Encoder、Prompt Encoder、Mask Decoder 的顺序讲解。","transition":"同一个模型随后进入标注流程，推动数据规模扩张。","estimated_seconds":85},"layout":"visual_left_text_right"
+    },
+    {
+      "unit_id":"unit_7a81fc5998f1","purpose":"展示模型与数据相互促进的三阶段流程。","question":"模型如何反过来扩展训练数据？","title":"数据引擎从人工辅助逐步过渡到全自动生成","title_kind":"claim","technical_title":"Three-Stage Data Engine","main_claim":"数据引擎从辅助人工走向半自动与全自动，让模型改进和数据扩张形成闭环。",
+      "body":["辅助人工：模型加速交互式标注。","半自动：自动掩码覆盖明显对象，人工补充困难对象。","全自动：规则网格提示结合质量筛选批量生成掩码。"],
+      "visuals":[{"visual_id":"b_data_engine","kind":"conceptual_diagram","source_ref":"evidence_39a37063b02f","role":"primary","treatment":"diagram","caption":"依据论文证据整理的三阶段流程","annotations":["该图为解释性流程，不替代论文实验 Figure。"]}],
+      "annotations":[],"takeaway":"核心结论：模型提升标注效率，新增数据再反哺模型。","evidence_ids":["evidence_39a37063b02f"],
+      "speaker_notes":{"purpose":"展示模型与数据相互促进的三阶段流程。","main_message":"数据引擎从辅助人工走向半自动与全自动，让模型改进和数据扩张形成闭环。","script":"第一阶段由 SAM 辅助人工点击标注。第二阶段先自动填充高置信对象，再由人工寻找遗漏对象。模型成熟后，第三阶段使用规则点网格和质量筛选实现全自动生成。","visual_guidance":"从左到右讲三阶段，并强调每一阶段如何改变下一轮数据。","transition":"闭环最终形成 SA-1B 的数据规模。","estimated_seconds":75},"layout":"process"
+    },
+    {
+      "unit_id":"unit_ef805782fe7c","purpose":"量化 SA-1B 的规模与自动生成方式。","question":"闭环最终生成了多大的数据集？","title":"全自动流程生成 11M 图像与 1.1B 掩码","title_kind":"claim","technical_title":"SA-1B Dataset","main_claim":"全自动流程覆盖 11M 张图像并生成 1.1B 个高质量掩码。",
+      "body":["数据来源覆盖 11M 张许可图像。","自动流程产出 1.1B 个高质量分割掩码。"],
+      "visuals":[{"visual_id":"b_dataset","kind":"source_asset","source_ref":"asset_e7daf064971f","role":"primary","treatment":"original","caption":"论文原始 Figure：数据集规模与掩码属性","annotations":["保持原图数值和图例，重点解释相对规模。"]}],
+      "annotations":[],"takeaway":"核心结论：数据引擎把模型能力转化为十亿级监督信号。","evidence_ids":["evidence_880baf60bf59"],
+      "speaker_notes":{"purpose":"量化 SA-1B 的规模与自动生成方式。","main_message":"全自动流程覆盖 11M 张图像并生成 1.1B 个高质量掩码。","script":"SA-1B 的关键并非单纯收集更多图片，而是使用成熟模型全自动生成掩码。论文报告覆盖 11M 张图像，总计 1.1B 个掩码，这一规模反过来支持模型的开放世界泛化。","visual_guidance":"先读图例与规模，再说明这些掩码来自全自动阶段。","transition":"下一页检查数据规模是否转化为零样本能力。","estimated_seconds":55},"layout":"visual_left_text_right"
+    },
+    {
+      "unit_id":"unit_63201d922971","purpose":"呈现单点提示与多任务零样本迁移证据。","question":"SAM 的零样本能力覆盖哪些场景？","title":"单点提示在 23 个数据集上保持广泛迁移能力","title_kind":"claim","technical_title":"Zero-Shot Transfer","main_claim":"单点提示在 23 个数据集上产生高质量掩码，并扩展到边缘、实例分割与文本提示等任务。",
+      "body":["核心测试覆盖 23 个分割数据集。","下游任务通过 Prompt Engineering 适配，不为每项任务重新训练模型。"],
+      "visuals":[{"visual_id":"b_zero_shot","kind":"source_asset","source_ref":"asset_3cac427e3331","role":"primary","treatment":"original","caption":"论文原始 Figure：单点提示在多数据集上的评测","annotations":["区分普通单输出与多候选 oracle 结果，避免过度解读。"]}],
+      "annotations":[],"takeaway":"核心结论：统一提示接口把同一模型迁移到不同数据分布与任务。","evidence_ids":["evidence_ac5f08f90510"],
+      "speaker_notes":{"purpose":"呈现单点提示与多任务零样本迁移证据。","main_message":"单点提示在 23 个数据集上产生高质量掩码，并扩展到边缘、实例分割与文本提示等任务。","script":"论文首先用最具歧义的单前景点检验基础能力，并在 23 个数据集上比较质量。随后通过提示工程扩展到边缘、实例分割和文本提示等任务，强调同一预训练目标的迁移范围。","visual_guidance":"先解释横跨数据集的总体比较，再说明 oracle 多候选结果的含义。","transition":"广泛结果之后，需要用消融拆解数据和模型因素。","estimated_seconds":80},"layout":"visual_left_text_right"
+    },
+    {
+      "unit_id":"unit_195d1f73cbf2","purpose":"展示消融覆盖的三个主要因素。","question":"性能提升来自哪些数据与模型因素？","title":"消融分离数据阶段、编码器规模与数据规模","title_kind":"claim","technical_title":"Ablation Study","main_claim":"消融分别检查数据引擎阶段、图像编码器规模和训练数据规模。",
+      "body":["比较不同数据引擎阶段的贡献。","比较图像编码器与训练数据扩展的影响。"],
+      "visuals":[{"visual_id":"b_ablation","kind":"source_asset","source_ref":"asset_a9f56515b4c6","role":"primary","treatment":"original","caption":"论文原始 Figure：数据阶段、编码器与数据规模消融","annotations":["按左、中、右三个子图依次讲解，不混合横轴含义。"]}],
+      "annotations":[],"takeaway":"核心结论：论文用多轴消融避免把收益归因于单一规模因素。","evidence_ids":["evidence_f31baf57596b"],
+      "speaker_notes":{"purpose":"展示消融覆盖的三个主要因素。","main_message":"消融分别检查数据引擎阶段、图像编码器规模和训练数据规模。","script":"这组消融把系统拆成三个维度：数据引擎阶段、图像编码器容量与训练数据量。阅读时要分别对应子图的比较对象，不能把所有提升笼统解释为数据更大。","visual_guidance":"严格按子图顺序讲，保留原图坐标与图例。","transition":"最后同时检查模型能力边界和数据代表性。","estimated_seconds":65},"layout":"visual_left_text_right"
+    },
+    {
+      "unit_id":"unit_c1cdfdec3c35","purpose":"呈现模型与数据层面的关键限制。","question":"SAM 和 SA-1B 仍有哪些重要限制？","title":"细结构、端到端速度与数据代表性仍有限制","title_kind":"claim","technical_title":"Limitations and RAI","main_claim":"模型仍会遗漏细结构且端到端速度受重型编码器限制，数据地域与收入代表性也不均衡。",
+      "body":["模型可能遗漏细结构并产生小型断裂区域。","提示交互快，但重型图像编码器限制完整流程速度。","多个数据集对部分地区与低收入国家代表不足。"],
+      "visuals":[{"visual_id":"b_geography","kind":"source_asset","source_ref":"asset_db48e02c2e0a","role":"primary","treatment":"original","caption":"论文原始 Figure：SA-1B 地理分布估计","annotations":["覆盖广不等于分布均衡，需要结合论文表格中的代表性结论。"]}],
+      "annotations":[],"takeaway":"核心结论：通用性目标不能替代细粒度质量、速度和公平性检查。","evidence_ids":["evidence_24b769ea7500","evidence_74dac3e54d1d"],
+      "speaker_notes":{"purpose":"呈现模型与数据层面的关键限制。","main_message":"模型仍会遗漏细结构且端到端速度受重型编码器限制，数据地域与收入代表性也不均衡。","script":"模型层面，SAM 对细结构和边界并不总是稳定，重型图像编码器也限制完整流程实时性。数据层面，覆盖国家数量并不等同于代表均衡，部分地区和低收入国家仍然不足。","visual_guidance":"先读地理覆盖图，再明确论文表格指出的代表不足结论。","transition":"这些边界帮助我们更准确地总结论文贡献。","estimated_seconds":75},"layout":"text_left_visual_right"
+    },
+    {
+      "unit_id":"unit_49bf6ddcebe8","purpose":"总结任务、模型与数据联合设计的研究方法。","question":"Segment Anything 最值得复用的研究思路是什么？","title":"任务、模型与数据闭环共同构成完整贡献","title_kind":"claim","technical_title":"Takeaway","main_claim":"真正的贡献是任务、模型与数据闭环共同设计，而非单独放大一个视觉模型。",
+      "body":["Promptable Segmentation 提供统一训练目标。","SAM 将图像计算与提示交互分离。","数据引擎持续扩大监督规模并反哺模型。"],"visuals":[],"annotations":[],"takeaway":"核心结论：基础模型项目需要同时设计任务接口与数据飞轮。","evidence_ids":["evidence_54cc2792a78d"],
+      "speaker_notes":{"purpose":"总结任务、模型与数据联合设计的研究方法。","main_message":"真正的贡献是任务、模型与数据闭环共同设计，而非单独放大一个视觉模型。","script":"论文的可复用价值在于完整闭环。任务定义让同一模型接受多种提示，模型架构让交互高效，数据引擎再把模型变成标注工具。三部分缺一都难以达到论文展示的规模和迁移范围。","visual_guidance":"结尾按任务、模型、数据顺序复述闭环。","transition":"结束汇报。","estimated_seconds":45},"layout":"minimal_text"
+    }
+  ]
+}

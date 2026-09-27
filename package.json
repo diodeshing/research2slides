@@ -1,0 +1,27 @@
+{
+  "name": "@research2slides/renderer",
+  "private": true,
+  "version": "0.2.0",
+  "description": "Typed PptxGenJS renderer for evidence-grounded Research2Slides artifacts.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p renderer/tsconfig.json",
+    "render": "npm run build && node renderer/dist/src/cli.js",
+    "test": "npm run build && node --test renderer/dist/tests/renderer.test.js"
+  },
+  "dependencies": {
+    "image-size": "2.0.4",
+    "jszip": "3.10.1",
+    "pptxgenjs": "4.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.4",
+    "typescript": "7.0.2"
+  },
+  "overrides": {
+    "image-size": "2.0.4"
+  }
+}

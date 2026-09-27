@@ -1,0 +1,349 @@
+{
+  "$defs": {
+    "DraftSlide": {
+      "additionalProperties": false,
+      "properties": {
+        "annotations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Annotations",
+          "type": "array"
+        },
+        "body": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 5,
+          "minItems": 1,
+          "title": "Body",
+          "type": "array"
+        },
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "layout": {
+          "enum": [
+            "minimal_text",
+            "visual_left_text_right",
+            "text_left_visual_right",
+            "full_visual",
+            "comparison",
+            "equation_focus",
+            "table_focus",
+            "process"
+          ],
+          "title": "Layout",
+          "type": "string"
+        },
+        "main_claim": {
+          "minLength": 1,
+          "title": "Main Claim",
+          "type": "string"
+        },
+        "purpose": {
+          "minLength": 1,
+          "title": "Purpose",
+          "type": "string"
+        },
+        "question": {
+          "minLength": 1,
+          "title": "Question",
+          "type": "string"
+        },
+        "speaker_notes": {
+          "$ref": "#/$defs/SpeakerNotes"
+        },
+        "takeaway": {
+          "minLength": 1,
+          "title": "Takeaway",
+          "type": "string"
+        },
+        "technical_title": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Technical Title"
+        },
+        "title": {
+          "maxLength": 110,
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "title_kind": {
+          "enum": [
+            "topic",
+            "claim"
+          ],
+          "title": "Title Kind",
+          "type": "string"
+        },
+        "unit_id": {
+          "title": "Unit Id",
+          "type": "string"
+        },
+        "visuals": {
+          "items": {
+            "$ref": "#/$defs/SlideVisual"
+          },
+          "title": "Visuals",
+          "type": "array"
+        }
+      },
+      "required": [
+        "unit_id",
+        "purpose",
+        "question",
+        "title",
+        "title_kind",
+        "main_claim",
+        "body",
+        "takeaway",
+        "evidence_ids",
+        "speaker_notes",
+        "layout"
+      ],
+      "title": "DraftSlide",
+      "type": "object"
+    },
+    "LanguageProfile": {
+      "enum": [
+        "zh_cn_bilingual_terms"
+      ],
+      "title": "LanguageProfile",
+      "type": "string"
+    },
+    "PresentationLanguageConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "language": {
+          "const": "zh-CN",
+          "default": "zh-CN",
+          "title": "Language",
+          "type": "string"
+        },
+        "preserve_source_visual_language": {
+          "const": true,
+          "default": true,
+          "title": "Preserve Source Visual Language",
+          "type": "boolean"
+        },
+        "terminology_mode": {
+          "const": "bilingual",
+          "default": "bilingual",
+          "title": "Terminology Mode",
+          "type": "string"
+        },
+        "translate_generic_labels": {
+          "const": true,
+          "default": true,
+          "title": "Translate Generic Labels",
+          "type": "boolean"
+        },
+        "translate_speaker_notes": {
+          "const": true,
+          "default": true,
+          "title": "Translate Speaker Notes",
+          "type": "boolean"
+        }
+      },
+      "title": "PresentationLanguageConfig",
+      "type": "object"
+    },
+    "PresentationMode": {
+      "enum": [
+        "paper-reading",
+        "own-research"
+      ],
+      "title": "PresentationMode",
+      "type": "string"
+    },
+    "SlideVisual": {
+      "additionalProperties": false,
+      "properties": {
+        "annotations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Annotations",
+          "type": "array"
+        },
+        "caption": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Caption"
+        },
+        "kind": {
+          "enum": [
+            "source_asset",
+            "source_table",
+            "source_equation",
+            "conceptual_diagram"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "role": {
+          "default": "primary",
+          "enum": [
+            "primary",
+            "supporting",
+            "background"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "source_ref": {
+          "title": "Source Ref",
+          "type": "string"
+        },
+        "table_column_labels": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Table Column Labels"
+        },
+        "treatment": {
+          "enum": [
+            "original",
+            "crop",
+            "zoom",
+            "highlight",
+            "native_table",
+            "equation",
+            "diagram"
+          ],
+          "title": "Treatment",
+          "type": "string"
+        },
+        "visual_id": {
+          "title": "Visual Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "visual_id",
+        "kind",
+        "source_ref",
+        "treatment"
+      ],
+      "title": "SlideVisual",
+      "type": "object"
+    },
+    "SpeakerNotes": {
+      "additionalProperties": false,
+      "properties": {
+        "estimated_seconds": {
+          "exclusiveMinimum": 0,
+          "title": "Estimated Seconds",
+          "type": "integer"
+        },
+        "main_message": {
+          "minLength": 1,
+          "title": "Main Message",
+          "type": "string"
+        },
+        "purpose": {
+          "minLength": 1,
+          "title": "Purpose",
+          "type": "string"
+        },
+        "script": {
+          "minLength": 20,
+          "title": "Script",
+          "type": "string"
+        },
+        "transition": {
+          "minLength": 1,
+          "title": "Transition",
+          "type": "string"
+        },
+        "visual_guidance": {
+          "minLength": 1,
+          "title": "Visual Guidance",
+          "type": "string"
+        }
+      },
+      "required": [
+        "purpose",
+        "main_message",
+        "script",
+        "visual_guidance",
+        "transition",
+        "estimated_seconds"
+      ],
+      "title": "SpeakerNotes",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "language_profile": {
+      "$ref": "#/$defs/LanguageProfile",
+      "default": "zh_cn_bilingual_terms"
+    },
+    "mode": {
+      "$ref": "#/$defs/PresentationMode"
+    },
+    "presentation": {
+      "$ref": "#/$defs/PresentationLanguageConfig"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "slides": {
+      "items": {
+        "$ref": "#/$defs/DraftSlide"
+      },
+      "minItems": 1,
+      "title": "Slides",
+      "type": "array"
+    },
+    "theme": {
+      "enum": [
+        "conference-minimal",
+        "group-meeting"
+      ],
+      "title": "Theme",
+      "type": "string"
+    }
+  },
+  "required": [
+    "mode",
+    "theme",
+    "slides"
+  ],
+  "title": "SlideSpecDraft",
+  "type": "object"
+}

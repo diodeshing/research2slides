@@ -1,0 +1,20 @@
+{
+  "name": "conference-minimal",
+  "fontFamily": "Microsoft YaHei",
+  "fontFallbacks": ["Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", "Arial"],
+  "equationFontFamily": "Cambria Math",
+  "background": "FFFFFF",
+  "surface": "F4F8FB",
+  "text": "102A43",
+  "muted": "627D98",
+  "accent": "0077B6",
+  "accentSoft": "DFF3FC",
+  "secondary": "00A896",
+  "warning": "C44536",
+  "titleSize": 29,
+  "technicalTitleSize": 11,
+  "bodySize": 19,
+  "takeawaySize": 17,
+  "citationSize": 10,
+  "lineWidth": 1.5
+}

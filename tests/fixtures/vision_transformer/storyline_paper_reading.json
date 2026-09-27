@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0",
+  "mode": "paper-reading",
+  "language_profile": "zh_cn_bilingual_terms",
+  "presentation": {
+    "language": "zh-CN",
+    "terminology_mode": "bilingual",
+    "preserve_source_visual_language": true,
+    "translate_generic_labels": true,
+    "translate_speaker_notes": true
+  },
+  "title": "图像块作为 Token：测试样例讲解",
+  "target_audience": "熟悉机器学习基础的 AI/CV 研究生组会听众",
+  "units": [
+    {
+      "role": "problem",
+      "section": "问题定义",
+      "question": "该样例探索了什么图像表示方式？",
+      "main_claim": "该样例探索把图像表示为一组图像块（Image Patches）序列。",
+      "evidence_ids": ["evidence_de3bf348fe61"],
+      "importance": 5,
+      "estimated_seconds": 50,
+      "rationale": "先说明表示问题，便于听众理解后续方法。",
+      "transition_intent": "继续说明图像块如何进入 Transformer。"
+    },
+    {
+      "role": "core_insight",
+      "section": "核心思想",
+      "question": "图像块如何与 Transformer 建立联系？",
+      "main_claim": "图像块被表示为序列并输入 Transformer。",
+      "evidence_ids": ["evidence_455d7ffb2d91"],
+      "importance": 5,
+      "estimated_seconds": 65,
+      "rationale": "原始 Figure 提供了从图像块到 Transformer 的概念桥梁。",
+      "transition_intent": "进一步解释图像块如何转换为 Token。"
+    },
+    {
+      "role": "method_overview",
+      "section": "方法原理",
+      "question": "样例如何构造 Token 序列？",
+      "main_claim": "样例把每个图像块映射为一个 Token。",
+      "evidence_ids": ["evidence_6ef1c6c9e84d", "evidence_b630e30c3c74"],
+      "importance": 5,
+      "estimated_seconds": 80,
+      "rationale": "原文段落和 Equation 共同支持这一方法解释。",
+      "transition_intent": "接着查看样例中唯一的量化比较。"
+    },
+    {
+      "role": "experiments",
+      "section": "实验结果",
+      "question": "样例包含什么量化比较？",
+      "main_claim": "Fixture B 报告 71.0，高于 Fixture A 的 70.0。",
+      "evidence_ids": ["evidence_3994cb2fa725"],
+      "importance": 4,
+      "estimated_seconds": 60,
+      "rationale": "这是 fixture 中唯一的量化比较。",
+      "transition_intent": "随后说明这些合成数值的证据限制。"
+    },
+    {
+      "role": "limitations",
+      "section": "批判性分析",
+      "question": "这些数值能否视为论文证据？",
+      "main_claim": "评估数值仅为测试而构造，不能作为论文证据。",
+      "evidence_ids": ["evidence_6eb5582ac3a0"],
+      "importance": 5,
+      "estimated_seconds": 40,
+      "rationale": "明确免责声明可以防止夸大测试结果。",
+      "transition_intent": "最后只保留证据支持的概念结论。"
+    },
+    {
+      "role": "takeaway",
+      "section": "核心结论",
+      "question": "听众最终应该记住什么？",
+      "main_claim": "该样例将图像块映射为 Token。",
+      "evidence_ids": ["evidence_d5c9ff78526f"],
+      "importance": 5,
+      "estimated_seconds": 35,
+      "rationale": "结论简短，并由现有证据直接支持。",
+      "transition_intent": "结束汇报。"
+    }
+  ]
+}

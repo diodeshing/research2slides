@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "mode": "paper-reading",
+  "language_profile": "zh_cn_bilingual_terms",
+  "presentation": {"language": "zh-CN", "terminology_mode": "bilingual", "preserve_source_visual_language": true, "translate_generic_labels": true, "translate_speaker_notes": true},
+  "title": "DeepSeek-V3 Technical Report：系统联合设计精读",
+  "target_audience": "熟悉大语言模型、MoE 与分布式训练的研究生组会听众",
+  "units": [
+    {"role":"problem","section":"系统问题","question":"超大规模 MoE 训练为什么是系统联合设计问题？","main_claim":"模型扩展必须同时控制推理效率、训练成本和跨节点通信开销。","evidence_ids":["evidence_393114edbd53"],"importance":5,"estimated_seconds":60,"rationale":"先建立报告横跨架构、数值与系统的阅读框架。","transition_intent":"用参数规模说明目标系统的复杂度。"},
+    {"role":"contributions","section":"模型规模","question":"DeepSeek-V3 的稀疏规模如何定义？","main_claim":"模型共有 671B 参数，每个 token 激活 37B 参数，以稀疏 MoE 控制计算量。","evidence_ids":["evidence_b8be9cac8dfd"],"importance":5,"estimated_seconds":55,"rationale":"参数规模是理解后续架构与系统选择的基线。","transition_intent":"进入 MLA 与 DeepSeekMoE 基础架构。"},
+    {"role":"method_overview","section":"基础架构","question":"基础架构如何兼顾推理和训练成本？","main_claim":"Multi-head Latent Attention 与 DeepSeekMoE 分别面向高效推理和经济训练。","evidence_ids":["evidence_2518142d87ff"],"importance":5,"estimated_seconds":80,"rationale":"用论文架构图建立主要模块关系。","transition_intent":"查看架构之上的训练目标创新。"},
+    {"role":"method_component","section":"训练目标","question":"负载均衡与预测目标有哪些新设计？","main_claim":"Auxiliary-Loss-Free Load Balancing 降低均衡约束的性能代价，MTP 增加多 token 预测监督。","evidence_ids":["evidence_fa9ef8d64091"],"importance":5,"estimated_seconds":85,"rationale":"这两项策略需要与基础 MoE 架构分开讲清。","transition_intent":"进一步进入低精度与并行训练系统。"},
+    {"role":"method_component","section":"训练系统","question":"FP8 与系统工程如何降低训练开销？","main_claim":"FP8 混合精度减少计算与存储成本，DualPipe 和通信重叠缓解跨节点 MoE 瓶颈。","evidence_ids":["evidence_63be2e5137e5","evidence_393114edbd53"],"importance":5,"estimated_seconds":90,"rationale":"训练效率来自数值格式和系统调度的协同。","transition_intent":"用训练成本与长上下文结果检查系统成效。"},
+    {"role":"experiments","section":"规模化结果","question":"联合设计最终带来了哪些可量化结果？","main_claim":"完整训练消耗 2.788M H800 GPU hours，并在 NIAH 测试中保持至 128K 上下文的稳健表现。","evidence_ids":["evidence_0406d76c2a32","evidence_aac29055741a"],"importance":5,"estimated_seconds":80,"rationale":"选择成本与长上下文两个互补结果，避免堆砌所有基准。","transition_intent":"再用消融验证两项训练策略。"},
+    {"role":"ablation","section":"消融验证","question":"MTP 与无辅助损失均衡是否各自有效？","main_claim":"两组消融分别显示 MTP 和无辅助损失负载均衡在多数基准上带来一致收益。","evidence_ids":["evidence_8e0e6fb2d2ec","evidence_666c342e805d"],"importance":5,"estimated_seconds":75,"rationale":"把两项创新的独立证据并列检查。","transition_intent":"从训练成功转向现实部署门槛。"},
+    {"role":"limitations","section":"部署边界","question":"这套系统对使用者仍有什么门槛？","main_claim":"推荐部署单元仍然较大，小规模团队难以直接承担高效推理基础设施。","evidence_ids":["evidence_aa9b4acec16c"],"importance":5,"estimated_seconds":55,"rationale":"防止把训练经济性误读成低部署门槛。","transition_intent":"回到联合设计这一总体方法论。"},
+    {"role":"takeaway","section":"核心结论","question":"应如何概括 DeepSeek-V3 的主要贡献？","main_claim":"其优势来自稀疏架构、训练目标、FP8 数值格式与系统工程的联合设计。","evidence_ids":["evidence_b5ad41ed20b8"],"importance":5,"estimated_seconds":45,"rationale":"复杂论文需要以系统关系而非模块清单收束。","transition_intent":"结束汇报。"}
+  ]
+}

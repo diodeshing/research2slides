@@ -1,0 +1,293 @@
+{
+  "schema_version": "1.1",
+  "paper_id": "attention-is-all-you-need-277a3557ef",
+  "mode": "own-research",
+  "theme": "conference-minimal",
+  "language": "zh-en",
+  "title": "Our Attention-based Sequence Modeling Fixture",
+  "slides": [
+    {
+      "slide_id": "S01",
+      "unit_id": "unit_9e564cc37877",
+      "order": 1,
+      "section": "Problem",
+      "purpose": "Frame the sequence-modeling problem that motivates our fixture design.",
+      "question": "What problem motivates our design?",
+      "title": "Sequence modeling motivates an attention-centered architecture",
+      "title_kind": "claim",
+      "technical_title": "Problem",
+      "main_claim": "Sequence modeling motivates an architecture centered on attention operations.",
+      "body": [
+        "Sequence modeling defines the problem context.",
+        "Attention operations define the design direction."
+      ],
+      "visuals": [],
+      "annotations": [],
+      "takeaway": "Our design starts from the sequence-modeling requirement.",
+      "evidence_ids": [
+        "evidence_d95a34ac8471"
+      ],
+      "citations": [
+        {
+          "evidence_id": "evidence_d95a34ac8471",
+          "source_ids": [
+            "para_tex_00002"
+          ],
+          "display_text": "Introduction"
+        }
+      ],
+      "layout": "minimal_text",
+      "speaker_notes": {
+        "purpose": "Frame the sequence-modeling problem that motivates our fixture design.",
+        "main_message": "Sequence modeling motivates an architecture centered on attention operations.",
+        "script": "先说明我们处理的 context 是 sequence modeling。这个需求决定了后续设计把 attention operations 放在核心位置。",
+        "visual_guidance": "Use a restrained text composition with the problem and design direction aligned vertically.",
+        "transition": "接下来说明我们的核心 interaction。",
+        "estimated_seconds": 50
+      }
+    },
+    {
+      "slide_id": "S02",
+      "unit_id": "unit_aa29d07adaa5",
+      "order": 2,
+      "section": "Our Idea",
+      "purpose": "Present the supported contribution using the source architecture figure.",
+      "question": "What interaction does our fixture emphasize?",
+      "title": "Our fixture connects queries, keys, and values",
+      "title_kind": "claim",
+      "technical_title": "Our Idea",
+      "main_claim": "Our fixture connects queries, keys, and values through attention.",
+      "body": [
+        "The attention block organizes the interaction.",
+        "The source figure anchors the explanation."
+      ],
+      "visuals": [
+        {
+          "visual_id": "visual_own_s02_architecture",
+          "kind": "source_asset",
+          "source_ref": "asset_1a3be26c450a",
+          "role": "primary",
+          "treatment": "original",
+          "caption": "Fixture architecture diagram",
+          "annotations": [
+            "Highlight the attention connection only."
+          ]
+        }
+      ],
+      "annotations": [],
+      "takeaway": "The contribution centers on query-key-value interaction.",
+      "evidence_ids": [
+        "evidence_38e5dbdebe5f"
+      ],
+      "citations": [
+        {
+          "evidence_id": "evidence_38e5dbdebe5f",
+          "source_ids": [
+            "para_tex_00004"
+          ],
+          "display_text": "Attention"
+        }
+      ],
+      "layout": "visual_left_text_right",
+      "speaker_notes": {
+        "purpose": "Present the supported contribution using the source architecture figure.",
+        "main_message": "Our fixture connects queries, keys, and values through attention.",
+        "script": "这一页说明我们的 fixture 强调什么。先看 source figure，再沿 attention connection 解释 query、key 和 value 的关系。",
+        "visual_guidance": "Let the original source figure dominate the slide and keep annotation to one highlight.",
+        "transition": "下面用公式解释这个 interaction。",
+        "estimated_seconds": 60
+      }
+    },
+    {
+      "slide_id": "S03",
+      "unit_id": "unit_23e9be3abd66",
+      "order": 3,
+      "section": "Method",
+      "purpose": "Explain the mathematical form of the fixture method.",
+      "question": "How do we express the attention operation?",
+      "title": "Attention combines query-key scores with values",
+      "title_kind": "claim",
+      "technical_title": "Method",
+      "main_claim": "The fixture defines attention as Attention(Q,K,V)=softmax(QK^T)V.",
+      "body": [
+        "QK^T forms matching scores.",
+        "softmax weights the values."
+      ],
+      "visuals": [
+        {
+          "visual_id": "visual_own_s03_equation",
+          "kind": "source_equation",
+          "source_ref": "eq_001",
+          "role": "primary",
+          "treatment": "equation",
+          "caption": "Equation 1",
+          "annotations": [
+            "Explain the equation from scores to weights to values."
+          ]
+        }
+      ],
+      "annotations": [],
+      "takeaway": "The method converts query-key scores into a weighted value combination.",
+      "evidence_ids": [
+        "evidence_49c833ade712"
+      ],
+      "citations": [
+        {
+          "evidence_id": "evidence_49c833ade712",
+          "source_ids": [
+            "eq_001"
+          ],
+          "display_text": "Model Architecture, Equation 1"
+        }
+      ],
+      "layout": "equation_focus",
+      "speaker_notes": {
+        "purpose": "Explain the mathematical form of the fixture method.",
+        "main_message": "The fixture defines attention as Attention(Q,K,V)=softmax(QK^T)V.",
+        "script": "公式从左到右解释。QK^T 形成 matching scores，softmax 把分数转为权重，最后这些权重作用在 V 上。",
+        "visual_guidance": "Use the source equation as the only primary visual and highlight each term in speaking order.",
+        "transition": "理解方法以后，看现有的量化结果。",
+        "estimated_seconds": 80
+      }
+    },
+    {
+      "slide_id": "S04",
+      "unit_id": "unit_5794ab56ee00",
+      "order": 4,
+      "section": "Evidence",
+      "purpose": "Present the available fixture comparison with its original precision.",
+      "question": "What result does our fixture contain?",
+      "title": "The fixture model scores 11.0 versus 10.0",
+      "title_kind": "claim",
+      "technical_title": "Evidence",
+      "main_claim": "The fixture model scores 11.0 versus 10.0 for the fixture baseline.",
+      "body": [
+        "Fixture baseline: 10.0",
+        "Fixture model: 11.0"
+      ],
+      "visuals": [
+        {
+          "visual_id": "visual_own_s04_table",
+          "kind": "source_table",
+          "source_ref": "table_001",
+          "role": "primary",
+          "treatment": "native_table",
+          "caption": "Table 1: Fixture evaluation results",
+          "annotations": [
+            "Highlight both score cells without adding a derived percentage."
+          ]
+        }
+      ],
+      "annotations": [],
+      "takeaway": "The fixture contains a one-point software-test comparison.",
+      "evidence_ids": [
+        "evidence_f918ef30ed37"
+      ],
+      "citations": [
+        {
+          "evidence_id": "evidence_f918ef30ed37",
+          "source_ids": [
+            "table_001"
+          ],
+          "display_text": "Experiments, Table 1"
+        }
+      ],
+      "layout": "table_focus",
+      "speaker_notes": {
+        "purpose": "Present the available fixture comparison with its original precision.",
+        "main_message": "The fixture model scores 11.0 versus 10.0 for the fixture baseline.",
+        "script": "这里只报告已有数值。baseline 是 10.0，fixture model 是 11.0。我们不增加百分比，也不把它解释成真实科研提升。",
+        "visual_guidance": "Render an editable two-row table and preserve labels and precision.",
+        "transition": "下一页说明为什么这个结果不能支持科研结论。",
+        "estimated_seconds": 60
+      }
+    },
+    {
+      "slide_id": "S05",
+      "unit_id": "unit_3d818af8a50c",
+      "order": 5,
+      "section": "Limitations",
+      "purpose": "State the evidence limitation candidly.",
+      "question": "What limitation prevents a scientific conclusion?",
+      "title": "Fixture values cannot support a scientific conclusion",
+      "title_kind": "claim",
+      "technical_title": "Limitations",
+      "main_claim": "The result values are invented solely for software testing.",
+      "body": [
+        "The values validate software behavior.",
+        "They do not validate the research method."
+      ],
+      "visuals": [],
+      "annotations": [],
+      "takeaway": "The current quantitative evidence is not scientific evidence.",
+      "evidence_ids": [
+        "evidence_2aaf4548dfbf"
+      ],
+      "citations": [
+        {
+          "evidence_id": "evidence_2aaf4548dfbf",
+          "source_ids": [
+            "para_tex_00005"
+          ],
+          "display_text": "Experiments"
+        }
+      ],
+      "layout": "minimal_text",
+      "speaker_notes": {
+        "purpose": "State the evidence limitation candidly.",
+        "main_message": "The result values are invented solely for software testing.",
+        "script": "这一限制必须直接说明。数值只验证 pipeline 是否能处理 table、claim 和 citation，不验证我们的研究方法。",
+        "visual_guidance": "Use a minimal text slide with strong hierarchy and no decorative warning graphic.",
+        "transition": "最后总结当前真正得到支持的结论。",
+        "estimated_seconds": 40
+      }
+    },
+    {
+      "slide_id": "S06",
+      "unit_id": "unit_9ccc3bf96c70",
+      "order": 6,
+      "section": "Conclusion",
+      "purpose": "Conclude with the evidence-supported concept.",
+      "question": "What is the supported conclusion?",
+      "title": "Attention links queries, keys, and values",
+      "title_kind": "claim",
+      "technical_title": "Conclusion",
+      "main_claim": "The fixture links attention to queries, keys, and values.",
+      "body": [
+        "The interaction concept is supported.",
+        "The synthetic score remains outside the research conclusion."
+      ],
+      "visuals": [],
+      "annotations": [],
+      "takeaway": "The supported conclusion concerns the interaction mechanism.",
+      "evidence_ids": [
+        "evidence_6723ce29875a"
+      ],
+      "citations": [
+        {
+          "evidence_id": "evidence_6723ce29875a",
+          "source_ids": [
+            "para_pdf_00002"
+          ],
+          "display_text": "p. 2"
+        }
+      ],
+      "layout": "minimal_text",
+      "speaker_notes": {
+        "purpose": "Conclude with the evidence-supported concept.",
+        "main_message": "The fixture links attention to queries, keys, and values.",
+        "script": "结论只保留证据支持的内容，也就是 attention 对 query、key 和 value 的连接。测试分数不进入我们的科研结论。",
+        "visual_guidance": "Use one conclusion sentence and one short evidence boundary statement.",
+        "transition": "End the presentation.",
+        "estimated_seconds": 40
+      }
+    }
+  ],
+  "estimated_total_seconds": 330,
+  "provenance": {
+    "provider": "json-slide-spec",
+    "model": "offline-fixture",
+    "prompt_version": "slide-spec-v1",
+    "input_fingerprint": "20b426aae1ba38a42c1e53686917655573302cc621caaa1ab06a2055418b726e"
+  }
+}

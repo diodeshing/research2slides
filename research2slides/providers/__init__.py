@@ -1,0 +1,2 @@
+"""Shared external provider adapters."""
+

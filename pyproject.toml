@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "research2slides"
+version = "0.2.0"
+description = "Source-grounded research presentation pipeline"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Research2Slides contributors" }]
+dependencies = [
+  "jsonschema>=4.23,<5",
+  "Pillow>=12,<13",
+  "pydantic>=2.10,<3",
+  "PyMuPDF>=1.28,<2",
+  "pypdf>=6,<7",
+  "typer>=0.15,<1",
+]
+
+[project.optional-dependencies]
+pdf = []
+qa = []
+dev = ["pytest>=8,<10"]
+
+[project.scripts]
+research2slides = "research2slides.cli.app:app"
+
+[tool.setuptools.packages.find]
+include = ["research2slides*"]
+
+[tool.setuptools.data-files]
+"share/research2slides/prompts" = ["prompts/*.md"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

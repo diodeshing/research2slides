@@ -1,0 +1,55 @@
+{
+  "schema_version":"1.0",
+  "mode":"paper-reading",
+  "theme":"group-meeting",
+  "language_profile":"zh_cn_bilingual_terms",
+  "presentation":{"language":"zh-CN","terminology_mode":"bilingual","preserve_source_visual_language":true,"translate_generic_labels":true,"translate_speaker_notes":true},
+  "slides":[
+    {
+      "unit_id":"unit_b3c842b18e0f","purpose":"建立循环模型的训练瓶颈。","question":"为什么循环序列模型难以高效扩展训练？","title":"逐位置依赖限制循环模型的训练并行化","title_kind":"claim","technical_title":"Sequential Bottleneck","main_claim":"循环模型的逐位置依赖限制训练并行化，序列越长约束越明显。",
+      "body":["隐藏状态依赖前一位置，计算必须沿序列逐步推进。","长序列会压缩批处理空间，并放大训练时间约束。"],"visuals":[],"annotations":[],"takeaway":"核心结论：计算顺序成为扩展序列模型的直接瓶颈。","evidence_ids":["evidence_739de7a56e04"],
+      "speaker_notes":{"purpose":"建立循环模型的训练瓶颈。","main_message":"循环模型的逐位置依赖限制训练并行化，序列越长约束越明显。","script":"先看论文要解决的计算问题。循环模型必须按照位置顺序更新隐藏状态，因此单个训练样本内部难以并行。序列变长后，这个限制与显存约束共同影响批量训练效率。","visual_guidance":"保持文字页简洁，先讲依赖关系，再讲训练后果。","transition":"接下来比较已经可以并行的卷积序列模型。","estimated_seconds":55},"layout":"minimal_text"
+    },
+    {
+      "unit_id":"unit_cbbb3065957f","purpose":"说明现有并行方案仍保留长距离路径问题。","question":"已有并行序列模型还缺少什么？","title":"卷积并行没有消除长距离依赖路径","title_kind":"claim","technical_title":"Remaining Gap","main_claim":"卷积模型可并行，但远距离位置之间的计算路径仍随距离增长。",
+      "body":["ConvS2S 的位置交互路径随距离线性增长。","ByteNet 将路径缩短到对数级，但仍不是常数路径。"],"visuals":[],"annotations":[],"takeaway":"核心结论：并行计算与短依赖路径需要同时满足。","evidence_ids":["evidence_e6ab5459445b"],
+      "speaker_notes":{"purpose":"说明现有并行方案仍保留长距离路径问题。","main_message":"卷积模型可并行，但远距离位置之间的计算路径仍随距离增长。","script":"卷积模型已经能同时处理多个位置，但两个远距离位置之间仍要经过多层传播。论文把问题进一步收紧为两项要求：训练可并行，同时任意位置之间要有更短的交互路径。","visual_guidance":"按线性路径、对数路径和目标状态依次讲解。","transition":"这两项要求共同引出完全基于 Attention 的 Transformer。","estimated_seconds":50},"layout":"minimal_text"
+    },
+    {
+      "unit_id":"unit_1afebbe31688","purpose":"提出论文的核心架构判断。","question":"Transformer 的关键结构选择是什么？","title":"Transformer 用 Attention 取代循环主干","title_kind":"claim","technical_title":"Core Insight","main_claim":"Transformer 去除循环结构，完全依赖注意力机制（Attention）建立全局依赖。",
+      "body":["任意位置可以直接参与全局信息交互。","训练阶段不再依赖循环状态逐步传播。"],"visuals":[],"annotations":[],"takeaway":"核心结论：Attention 同时服务全局依赖与训练并行。","evidence_ids":["evidence_3b9717cd4ab2","evidence_5abe900da844"],
+      "speaker_notes":{"purpose":"提出论文的核心架构判断。","main_message":"Transformer 去除循环结构，完全依赖注意力机制（Attention）建立全局依赖。","script":"论文最重要的变化不是增加一个注意力模块，而是让 Attention 成为主干计算。去除循环结构以后，各位置可以直接建立全局依赖，同时训练可以充分并行。","visual_guidance":"突出架构判断，不在这一页展开公式。","transition":"下一页用原始 Figure 查看编码器和解码器怎样组织这些模块。","estimated_seconds":60},"layout":"minimal_text"
+    },
+    {
+      "unit_id":"unit_9c309e6a9bd9","purpose":"用论文原始架构图解释 Encoder 与 Decoder。","question":"编码器与解码器如何组织 Attention？","title":"编码器与解码器围绕 Attention 分层堆叠","title_kind":"claim","technical_title":"Transformer Architecture","main_claim":"Transformer 以编码器和解码器堆叠组织自注意力与跨注意力。",
+      "body":["Encoder 使用自注意力和位置前馈网络形成表征。","Decoder 增加对 Encoder 输出的跨注意力，并屏蔽未来位置。"],
+      "visuals":[{"visual_id":"a_architecture","kind":"source_asset","source_ref":"asset_b773080ceb82","role":"primary","treatment":"original","caption":"论文原始 Figure：Transformer model architecture","annotations":["先沿 Encoder 自下而上讲解，再转向 Decoder 的跨注意力。"]}],
+      "annotations":[],"takeaway":"核心结论：相同模块通过堆叠与掩码承担编码和生成。","evidence_ids":["evidence_9ffd6021d9b4"],
+      "speaker_notes":{"purpose":"用论文原始架构图解释 Encoder 与 Decoder。","main_message":"Transformer 以编码器和解码器堆叠组织自注意力与跨注意力。","script":"先看左侧 Encoder，每层包含自注意力与前馈网络。右侧 Decoder 在掩码自注意力之外，还读取 Encoder 输出。图中的残差连接与归一化保证深层堆叠可训练。","visual_guidance":"保持原图比例，依次指向 Encoder、Decoder 和跨注意力连接。","transition":"整体结构清楚后，放大一次 Attention 计算和多头投影。","estimated_seconds":80},"layout":"visual_left_text_right"
+    },
+    {
+      "unit_id":"unit_25e2ac451873","purpose":"结合公式解释 Attention 核心计算。","question":"Scaled Dot-Product 与 Multi-Head Attention 如何配合？","title":"缩放点积负责匹配，多头投影并行学习关系","title_kind":"claim","technical_title":"Scaled Dot-Product and Multi-Head Attention","main_claim":"缩放点积完成 Query-Key 匹配与 Value 聚合，多头投影并行学习不同关系。",
+      "body":["Query 与 Key 的点积经缩放和 Softmax 形成权重。","不同投影空间并行计算后，再拼接得到最终输出。"],
+      "visuals":[{"visual_id":"a_attention_equation","kind":"source_equation","source_ref":"eq_001","role":"primary","treatment":"equation","caption":"Scaled Dot-Product Attention","annotations":["依次解释缩放、Softmax 和 Value 聚合。"]}],
+      "annotations":[],"takeaway":"核心结论：单次匹配负责聚合，多头结构扩大可学习关系空间。","evidence_ids":["evidence_163fc22ddbd2","evidence_e6969e6b8c3a"],
+      "speaker_notes":{"purpose":"结合公式解释 Attention 核心计算。","main_message":"缩放点积完成 Query-Key 匹配与 Value 聚合，多头投影并行学习不同关系。","script":"公式先计算 Query 与 Key 的匹配分数，再用 Softmax 权重聚合 Value。除以根号维度用于稳定点积尺度。Multi-Head Attention 在多个投影空间重复这一过程，让不同头学习互补关系。","visual_guidance":"沿公式从 Query-Key 匹配讲到 Value 聚合，多头机制由正文补充。","transition":"接下来检查这套架构在机器翻译任务上的量化结果。","estimated_seconds":95},"layout":"equation_focus"
+    },
+    {
+      "unit_id":"unit_3e54ac058635","purpose":"呈现最具代表性的翻译结果与训练成本。","question":"Transformer 在机器翻译上取得了什么结果？","title":"Transformer big 达到 28.4 BLEU 并完成高效训练","title_kind":"claim","technical_title":"WMT 2014 Results","main_claim":"Transformer big 在 WMT 2014 英德翻译达到 28.4 BLEU，并以 8 块 P100 训练 3.5 天。",
+      "body":["英德翻译任务 WMT 2014 English-to-German：28.4 BLEU。","训练配置：8 块 P100 GPU，训练 3.5 天。"],
+      "visuals":[{"visual_id":"a_wmt_table","kind":"source_table","source_ref":"table_004","role":"primary","treatment":"highlight","annotations":[]}],
+      "annotations":["为保证可读性，页面保留表头、强基线与 Transformer 行；原表数值未改写。"],"takeaway":"核心结论：翻译质量与训练效率同时构成论文的实证支撑。","evidence_ids":["evidence_9b24b8648a8a"],
+      "speaker_notes":{"purpose":"呈现最具代表性的翻译结果与训练成本。","main_message":"Transformer big 在 WMT 2014 英德翻译达到 28.4 BLEU，并以 8 块 P100 训练 3.5 天。","script":"结果页同时看质量和成本。Transformer big 在英德翻译上达到 28.4 BLEU，论文报告使用 8 块 P100 训练 3.5 天。表格中的其他系统用于提供当时的比较背景。","visual_guidance":"先定位 Transformer big 行，再分别指出 BLEU 与训练成本列。","transition":"单一结果之后，还要看变体实验和方法边界。","estimated_seconds":70},"layout":"table_focus"
+    },
+    {
+      "unit_id":"unit_877e06cbbd78","purpose":"综合架构变体证据与长序列限制。","question":"变体实验和复杂度分析说明了什么？","title":"变体比较支撑设计选择，长序列仍是计算边界","title_kind":"claim","technical_title":"Ablation and Limitations","main_claim":"论文用架构变体比较支撑设计选择，同时指出完整自注意力在超长序列上的计算边界。",
+      "body":["架构变体比较用于检查头数、维度与其他设计选择。","完整自注意力处理超长序列时仍需要限制邻域或其他稀疏化方案。"],"visuals":[],"annotations":[],"takeaway":"核心结论：结构选择有实验依据，但全局 Attention 仍有长度成本。","evidence_ids":["evidence_b36b0a05a2cd","evidence_f27183358567"],
+      "speaker_notes":{"purpose":"综合架构变体证据与长序列限制。","main_message":"论文用架构变体比较支撑设计选择，同时指出完整自注意力在超长序列上的计算边界。","script":"论文并非只报告最终模型，还比较了多种架构变体。另一方面，完整自注意力需要处理所有位置对，长序列的计算压力依然存在，论文把局部邻域注意力列为进一步研究方向。","visual_guidance":"左右分区讲实验支撑与适用边界，不添加未引用数值。","transition":"最后总结 Transformer 对序列建模主干的改变。","estimated_seconds":70},"layout":"comparison"
+    },
+    {
+      "unit_id":"unit_d56d4f596e72","purpose":"以机制性结论结束论文精读。","question":"今天应当记住 Transformer 的哪一项改变？","title":"Attention 同时缩短依赖路径并释放训练并行性","title_kind":"claim","technical_title":"Takeaway","main_claim":"Transformer 以 Attention 缩短依赖路径并释放训练并行性，改变了序列模型的主干设计。",
+      "body":["全局交互不再依赖循环状态逐步传播。","架构、公式和翻译结果共同支持这一范式变化。"],"visuals":[],"annotations":[],"takeaway":"核心结论：Transformer 的突破来自计算路径与训练方式的共同重构。","evidence_ids":["evidence_5abe900da844","evidence_3b9717cd4ab2"],
+      "speaker_notes":{"purpose":"以机制性结论结束论文精读。","main_message":"Transformer 以 Attention 缩短依赖路径并释放训练并行性，改变了序列模型的主干设计。","script":"收尾只保留一条机制性结论。Transformer 用 Attention 直接连接位置，缩短依赖传播路径，同时摆脱循环计算对训练并行的限制。这项组合改变后来序列模型的默认主干。","visual_guidance":"结尾页保持留白，只强调两项相互关联的机制收益。","transition":"结束汇报。","estimated_seconds":45},"layout":"minimal_text"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0",
+  "claims": [
+    {
+      "category": "problem",
+      "type": "problem",
+      "claim": "循环序列模型的逐位置计算限制了训练阶段的并行化。",
+      "source_refs": [{"source_id": "para_tex_00008", "excerpt": "This inherently sequential nature precludes parallelization within training examples"}],
+      "confidence": "high"
+    },
+    {
+      "category": "gap",
+      "type": "gap",
+      "claim": "卷积序列模型虽能并行计算，但远距离位置之间的路径仍随距离增长。",
+      "source_refs": [{"source_id": "para_tex_00011", "excerpt": "the number of operations required to relate signals from two arbitrary input or output positions grows in the distance between positions"}],
+      "confidence": "high"
+    },
+    {
+      "category": "central_insight",
+      "type": "contribution",
+      "claim": "Transformer 去除循环结构，完全依赖注意力机制建模输入与输出的全局依赖。",
+      "source_refs": [{"source_id": "para_tex_00010", "excerpt": "we propose the Transformer, a model architecture eschewing recurrence and instead relying entirely on an attention mechanism to draw global dependencies between input and output"}],
+      "confidence": "high"
+    },
+    {
+      "category": "method",
+      "type": "method",
+      "claim": "Transformer 使用编码器与解码器堆叠构成整体架构。",
+      "source_refs": [{"source_id": "fig_001", "excerpt": "The Transformer - model architecture."}],
+      "confidence": "high"
+    },
+    {
+      "category": "method",
+      "type": "equation",
+      "claim": "Scaled Dot-Product Attention 用缩放后的 Query-Key 点积经 Softmax 加权 Value。",
+      "source_refs": [{"source_id": "eq_001", "excerpt": "\\mathrm{Attention}(Q, K, V) = \\mathrm{softmax}(\\frac{QK^T}{\\sqrt{d_k}})V"}],
+      "confidence": "high"
+    },
+    {
+      "category": "design_rationale",
+      "type": "method",
+      "claim": "Multi-Head Attention 在不同投影空间并行执行注意力，再拼接并投影输出。",
+      "source_refs": [{"source_id": "para_tex_00027", "excerpt": "On each of these projected versions of queries, keys and values we then perform the attention function in parallel"}],
+      "confidence": "high"
+    },
+    {
+      "category": "experiment_findings",
+      "type": "experimental_result",
+      "claim": "Transformer big 在 WMT 2014 英德翻译达到 28.4 BLEU，训练耗时 3.5 天并使用 8 块 P100 GPU。",
+      "source_refs": [{"source_id": "para_tex_00059", "excerpt": "establishing a new state-of-the-art BLEU score of $28.4$. The configuration of this model is listed in the bottom line of Table~. Training took $3.5$ days on $8$ P100 GPUs."}],
+      "confidence": "high"
+    },
+    {
+      "category": "ablation_findings",
+      "type": "ablation_result",
+      "claim": "论文系统比较了 Transformer 架构变体对翻译开发集指标的影响。",
+      "source_refs": [{"source_id": "table_005", "excerpt": "Variations on the Transformer architecture."}],
+      "confidence": "high"
+    },
+    {
+      "category": "limitations",
+      "type": "limitation",
+      "claim": "完整自注意力面对很长序列时仍有计算压力，论文提出限制到局部邻域作为未来方向。",
+      "source_refs": [{"source_id": "para_tex_00046", "excerpt": "To improve computational performance for tasks involving very long sequences, self-attention could be restricted to considering only a neighborhood"}],
+      "confidence": "high"
+    },
+    {
+      "category": "audience_takeaways",
+      "type": "conclusion",
+      "claim": "Transformer 的关键价值在于以注意力缩短依赖路径，并释放训练并行性。",
+      "source_refs": [
+        {"source_id": "para_tex_00010", "excerpt": "The Transformer allows for significantly more parallelization"},
+        {"source_id": "para_tex_00011", "excerpt": "In the Transformer this is reduced to a constant number of operations"}
+      ],
+      "confidence": "high"
+    }
+  ],
+  "relations": [
+    {"source_claim_index": 1, "target_claim_index": 0, "relation": "motivates"},
+    {"source_claim_index": 2, "target_claim_index": 0, "relation": "implements"},
+    {"source_claim_index": 4, "target_claim_index": 2, "relation": "implements"},
+    {"source_claim_index": 5, "target_claim_index": 4, "relation": "implements"},
+    {"source_claim_index": 6, "target_claim_index": 2, "relation": "validates"},
+    {"source_claim_index": 8, "target_claim_index": 2, "relation": "qualifies"}
+  ]
+}

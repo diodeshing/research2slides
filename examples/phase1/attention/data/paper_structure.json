@@ -1,0 +1,155 @@
+{
+  "schema_version": "1.0",
+  "paper_id": "attention-is-all-you-need-277a3557ef",
+  "metadata": {
+    "title": "Attention Is All You Need",
+    "authors": [
+      "Ashish Vaswani",
+      "Noam Shazeer"
+    ],
+    "abstract": "This compact fixture represents a public Transformer paper for parser integration tests.",
+    "language": null
+  },
+  "page_count": 2,
+  "sections": [
+    {
+      "section_id": "sec_tex_001",
+      "title": "Introduction",
+      "level": 1,
+      "order": 0,
+      "parent_id": null,
+      "page_start": null,
+      "paragraph_ids": [
+        "para_tex_00002",
+        "para_tex_00003"
+      ]
+    },
+    {
+      "section_id": "sec_tex_002",
+      "title": "Model Architecture",
+      "level": 1,
+      "order": 1,
+      "parent_id": null,
+      "page_start": null,
+      "paragraph_ids": []
+    },
+    {
+      "section_id": "sec_tex_003",
+      "title": "Attention",
+      "level": 2,
+      "order": 2,
+      "parent_id": "sec_tex_002",
+      "page_start": null,
+      "paragraph_ids": [
+        "para_tex_00004"
+      ]
+    },
+    {
+      "section_id": "sec_tex_004",
+      "title": "Experiments",
+      "level": 1,
+      "order": 3,
+      "parent_id": null,
+      "page_start": null,
+      "paragraph_ids": [
+        "para_tex_00005"
+      ]
+    }
+  ],
+  "paragraphs": [
+    {
+      "paragraph_id": "para_tex_00001",
+      "text": "article Attention Is All You Need Ashish Vaswani Noam Shazeer document",
+      "section_id": null,
+      "page": null,
+      "bbox": null,
+      "source": "latex"
+    },
+    {
+      "paragraph_id": "para_tex_00002",
+      "text": "Introduction Sequence modeling motivates an architecture centered on attention operations.",
+      "section_id": "sec_tex_001",
+      "page": null,
+      "bbox": null,
+      "source": "latex"
+    },
+    {
+      "paragraph_id": "para_tex_00003",
+      "text": "This fixture paragraph exists to test stable paragraph identifiers and section linkage. Model Architecture",
+      "section_id": "sec_tex_001",
+      "page": null,
+      "bbox": null,
+      "source": "latex"
+    },
+    {
+      "paragraph_id": "para_tex_00004",
+      "text": "Attention The attention block connects queries, keys, and values in this synthetic example. Experiments",
+      "section_id": "sec_tex_003",
+      "page": null,
+      "bbox": null,
+      "source": "latex"
+    },
+    {
+      "paragraph_id": "para_tex_00005",
+      "text": "The table contains invented values solely for software testing. document",
+      "section_id": "sec_tex_004",
+      "page": null,
+      "bbox": null,
+      "source": "latex"
+    },
+    {
+      "paragraph_id": "para_pdf_00001",
+      "text": "Sequence modeling fixture text.",
+      "section_id": "sec_pdf_002",
+      "page": 1,
+      "bbox": null,
+      "source": "pdf"
+    },
+    {
+      "paragraph_id": "para_pdf_00002",
+      "text": "Attention connects queries, keys, and values.",
+      "section_id": "sec_pdf_003",
+      "page": 2,
+      "bbox": null,
+      "source": "pdf"
+    }
+  ],
+  "figures": [
+    {
+      "figure_id": "fig_001",
+      "number": "1",
+      "caption": "Fixture diagram of an encoder and decoder flow.",
+      "label": "fig:architecture",
+      "source_file": "figures/architecture",
+      "related_section": "sec_tex_002",
+      "page": null
+    }
+  ],
+  "tables": [
+    {
+      "table_id": "table_001",
+      "number": "1",
+      "caption": "Fixture evaluation results.",
+      "label": "tab:results",
+      "latex": "\\caption{Fixture evaluation results.}\n\\label{tab:results}\n\\begin{tabular}{lc}\nSystem & Score \\\\\nFixture baseline & 10.0 \\\\\nFixture model & 11.0\n\\end{tabular}",
+      "related_section": "sec_tex_004",
+      "page": null
+    }
+  ],
+  "equations": [
+    {
+      "equation_id": "eq_001",
+      "number": "1",
+      "label": "eq:attention",
+      "latex": "Attention(Q,K,V)=softmax(QK^T)V",
+      "related_section": "sec_tex_002",
+      "page": null
+    }
+  ],
+  "references": [],
+  "provenance": {
+    "pdf_backend": "pypdf",
+    "latex_backend": "research2slides-regex-latex-v1",
+    "warnings": []
+  }
+}

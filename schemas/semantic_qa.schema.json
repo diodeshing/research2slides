@@ -1,0 +1,163 @@
+{
+  "$defs": {
+    "SemanticDependency": {
+      "additionalProperties": false,
+      "properties": {
+        "concept": {
+          "minLength": 1,
+          "title": "Concept",
+          "type": "string"
+        },
+        "prerequisite_slide_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Prerequisite Slide Ids",
+          "type": "array"
+        },
+        "rationale": {
+          "minLength": 1,
+          "title": "Rationale",
+          "type": "string"
+        },
+        "required": {
+          "default": true,
+          "title": "Required",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "concept",
+        "rationale"
+      ],
+      "title": "SemanticDependency",
+      "type": "object"
+    },
+    "SemanticQAProvenance": {
+      "additionalProperties": false,
+      "properties": {
+        "input_fingerprint": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Input Fingerprint",
+          "type": "string"
+        },
+        "model": {
+          "title": "Model",
+          "type": "string"
+        },
+        "prompt_version": {
+          "title": "Prompt Version",
+          "type": "string"
+        },
+        "provider": {
+          "title": "Provider",
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider",
+        "model",
+        "prompt_version",
+        "input_fingerprint"
+      ],
+      "title": "SemanticQAProvenance",
+      "type": "object"
+    },
+    "SemanticSlideEvaluation": {
+      "additionalProperties": false,
+      "properties": {
+        "claim_evidence": {
+          "enum": [
+            "entailed",
+            "partially_supported",
+            "unsupported",
+            "insufficient_evidence"
+          ],
+          "title": "Claim Evidence",
+          "type": "string"
+        },
+        "claim_evidence_rationale": {
+          "minLength": 1,
+          "title": "Claim Evidence Rationale",
+          "type": "string"
+        },
+        "claim_strength": {
+          "enum": [
+            "calibrated",
+            "overstated",
+            "understated",
+            "not_applicable"
+          ],
+          "title": "Claim Strength",
+          "type": "string"
+        },
+        "claim_strength_rationale": {
+          "minLength": 1,
+          "title": "Claim Strength Rationale",
+          "type": "string"
+        },
+        "dependencies": {
+          "items": {
+            "$ref": "#/$defs/SemanticDependency"
+          },
+          "title": "Dependencies",
+          "type": "array"
+        },
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "slide_id": {
+          "minLength": 1,
+          "title": "Slide Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "slide_id",
+        "claim_evidence",
+        "claim_evidence_rationale",
+        "evidence_ids",
+        "claim_strength",
+        "claim_strength_rationale"
+      ],
+      "title": "SemanticSlideEvaluation",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "evaluations": {
+      "items": {
+        "$ref": "#/$defs/SemanticSlideEvaluation"
+      },
+      "minItems": 1,
+      "title": "Evaluations",
+      "type": "array"
+    },
+    "paper_id": {
+      "title": "Paper Id",
+      "type": "string"
+    },
+    "provenance": {
+      "$ref": "#/$defs/SemanticQAProvenance"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "paper_id",
+    "evaluations",
+    "provenance"
+  ],
+  "title": "SemanticQAResult",
+  "type": "object"
+}

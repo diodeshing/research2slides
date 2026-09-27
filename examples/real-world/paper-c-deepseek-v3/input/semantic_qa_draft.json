@@ -1,0 +1,142 @@
+{
+  "schema_version": "1.0",
+  "evaluations": [
+    {
+      "slide_id": "S01",
+      "claim_evidence": "entailed",
+      "claim_evidence_rationale": "原文同时指出 DualPipe 隐藏训练通信，并将大规模 MoE 的效率、成本和通信作为联合系统约束。",
+      "evidence_ids": ["evidence_393114edbd53"],
+      "claim_strength": "calibrated",
+      "claim_strength_rationale": "页面使用“必须同时控制”概括系统设计约束，没有声称单一组件已经完全消除开销。",
+      "dependencies": []
+    },
+    {
+      "slide_id": "S02",
+      "claim_evidence": "entailed",
+      "claim_evidence_rationale": "证据直接给出 671B 总参数和每个 token 激活 37B 参数的 MoE 配置。",
+      "evidence_ids": ["evidence_b8be9cac8dfd"],
+      "claim_strength": "calibrated",
+      "claim_strength_rationale": "页面只解释稀疏激活如何区分总容量与单次计算，没有扩展到未被证明的性能结论。",
+      "dependencies": [
+        {
+          "concept": "MoE 的系统约束",
+          "prerequisite_slide_ids": ["S01"],
+          "required": true,
+          "rationale": "先建立扩展约束，再解释稀疏容量配置。"
+        }
+      ]
+    },
+    {
+      "slide_id": "S03",
+      "claim_evidence": "entailed",
+      "claim_evidence_rationale": "原文明确把 MLA 对应高效推理，把 DeepSeekMoE 对应经济训练。",
+      "evidence_ids": ["evidence_2518142d87ff"],
+      "claim_strength": "calibrated",
+      "claim_strength_rationale": "页面保持“面向”与“兼顾”的设计目的措辞，没有把目的写成已独立验证的因果收益。",
+      "dependencies": [
+        {
+          "concept": "稀疏 MoE 配置",
+          "prerequisite_slide_ids": ["S02"],
+          "required": true,
+          "rationale": "基础架构说明建立在上一页的 MoE 规模背景上。"
+        }
+      ]
+    },
+    {
+      "slide_id": "S04",
+      "claim_evidence": "entailed",
+      "claim_evidence_rationale": "证据分别说明无辅助损失负载均衡与 MTP 训练目标，页面没有混合两者的功能。",
+      "evidence_ids": ["evidence_fa9ef8d64091"],
+      "claim_strength": "calibrated",
+      "claim_strength_rationale": "“降低性能代价”和“增加多 token 监督”与方法设计意图一致，没有提前宣称消融结果。",
+      "dependencies": [
+        {
+          "concept": "DeepSeekMoE 训练框架",
+          "prerequisite_slide_ids": ["S03"],
+          "required": true,
+          "rationale": "训练目标解释依赖基础架构与专家路由背景。"
+        }
+      ]
+    },
+    {
+      "slide_id": "S05",
+      "claim_evidence": "entailed",
+      "claim_evidence_rationale": "FP8 证据直接支持训练加速和显存降低；DualPipe 原文直接支持减少流水线气泡并隐藏大部分训练通信。",
+      "evidence_ids": ["evidence_63be2e5137e5", "evidence_393114edbd53"],
+      "claim_strength": "calibrated",
+      "claim_strength_rationale": "页面使用“缓解”和“减少”而不是“消除”，与原文强度一致。",
+      "dependencies": [
+        {
+          "concept": "跨节点 MoE 通信约束",
+          "prerequisite_slide_ids": ["S01"],
+          "required": true,
+          "rationale": "系统优化页回应开场提出的通信问题。"
+        }
+      ]
+    },
+    {
+      "slide_id": "S06",
+      "claim_evidence": "entailed",
+      "claim_evidence_rationale": "两条实验结果分别直接给出 2.788M H800 GPU hours 与 NIAH 至 128K 的稳健表现。",
+      "evidence_ids": ["evidence_0406d76c2a32", "evidence_aac29055741a"],
+      "claim_strength": "calibrated",
+      "claim_strength_rationale": "页面把训练消耗与长上下文表现作为两类独立证据，没有用其中一个推出另一个。",
+      "dependencies": [
+        {
+          "concept": "训练系统设计",
+          "prerequisite_slide_ids": ["S05"],
+          "required": true,
+          "rationale": "理解训练成本数字前需要先知道 FP8 与 DualPipe 的系统背景。"
+        }
+      ]
+    },
+    {
+      "slide_id": "S07",
+      "claim_evidence": "entailed",
+      "claim_evidence_rationale": "两条消融证据分别指出 MTP 持续改善多数基准，以及无辅助损失方案在多数基准上优于纯辅助损失方案。",
+      "evidence_ids": ["evidence_8e0e6fb2d2ec", "evidence_666c342e805d"],
+      "claim_strength": "calibrated",
+      "claim_strength_rationale": "页面保留“多数基准”的范围，没有泛化为所有任务或统计显著收益。",
+      "dependencies": [
+        {
+          "concept": "MTP 与无辅助损失负载均衡",
+          "prerequisite_slide_ids": ["S04"],
+          "required": true,
+          "rationale": "消融页验证上一页介绍的两项训练策略。"
+        }
+      ]
+    },
+    {
+      "slide_id": "S08",
+      "claim_evidence": "entailed",
+      "claim_evidence_rationale": "限制证据直接说明推荐部署单元较大，可能给小规模团队带来负担。",
+      "evidence_ids": ["evidence_aa9b4acec16c"],
+      "claim_strength": "calibrated",
+      "claim_strength_rationale": "页面使用“难以直接承担”概括原文的 burden 表述，没有声称绝对无法部署。",
+      "dependencies": [
+        {
+          "concept": "系统规模与效率收益",
+          "prerequisite_slide_ids": ["S02", "S06"],
+          "required": true,
+          "rationale": "部署边界在规模配置和结果之后出现，便于校准可用性。"
+        }
+      ]
+    },
+    {
+      "slide_id": "S09",
+      "claim_evidence": "entailed",
+      "claim_evidence_rationale": "结论证据直接把系统性优势归因于稀疏架构、训练目标、低精度计算与系统工程的联合设计。",
+      "evidence_ids": ["evidence_b5ad41ed20b8"],
+      "claim_strength": "calibrated",
+      "claim_strength_rationale": "页面总结与结论证据同范围，没有添加未验证的单组件因果排序。",
+      "dependencies": [
+        {
+          "concept": "架构、训练目标、系统工程与限制",
+          "prerequisite_slide_ids": ["S03", "S04", "S05", "S07", "S08"],
+          "required": true,
+          "rationale": "联合设计结论依赖前文分别解释并验证各层。"
+        }
+      ]
+    }
+  ]
+}

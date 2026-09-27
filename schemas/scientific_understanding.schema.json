@@ -1,0 +1,148 @@
+{
+  "$defs": {
+    "GroundedAnswer": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "supported",
+            "insufficient_evidence"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "evidence_ids",
+        "note"
+      ],
+      "title": "GroundedAnswer",
+      "type": "object"
+    },
+    "UnderstandingAnswers": {
+      "additionalProperties": false,
+      "properties": {
+        "ablation_findings": {
+          "$ref": "#/$defs/GroundedAnswer"
+        },
+        "audience_takeaways": {
+          "$ref": "#/$defs/GroundedAnswer"
+        },
+        "central_insight": {
+          "$ref": "#/$defs/GroundedAnswer"
+        },
+        "contributions": {
+          "$ref": "#/$defs/GroundedAnswer"
+        },
+        "design_rationale": {
+          "$ref": "#/$defs/GroundedAnswer"
+        },
+        "existing_approaches": {
+          "$ref": "#/$defs/GroundedAnswer"
+        },
+        "experiment_findings": {
+          "$ref": "#/$defs/GroundedAnswer"
+        },
+        "gap": {
+          "$ref": "#/$defs/GroundedAnswer"
+        },
+        "importance": {
+          "$ref": "#/$defs/GroundedAnswer"
+        },
+        "limitations": {
+          "$ref": "#/$defs/GroundedAnswer"
+        },
+        "method": {
+          "$ref": "#/$defs/GroundedAnswer"
+        },
+        "problem": {
+          "$ref": "#/$defs/GroundedAnswer"
+        }
+      },
+      "required": [
+        "problem",
+        "importance",
+        "existing_approaches",
+        "gap",
+        "central_insight",
+        "contributions",
+        "method",
+        "design_rationale",
+        "experiment_findings",
+        "ablation_findings",
+        "limitations",
+        "audience_takeaways"
+      ],
+      "title": "UnderstandingAnswers",
+      "type": "object"
+    },
+    "UnderstandingProvenance": {
+      "additionalProperties": false,
+      "properties": {
+        "input_fingerprint": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Input Fingerprint",
+          "type": "string"
+        },
+        "model": {
+          "title": "Model",
+          "type": "string"
+        },
+        "prompt_version": {
+          "title": "Prompt Version",
+          "type": "string"
+        },
+        "provider": {
+          "title": "Provider",
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider",
+        "model",
+        "prompt_version",
+        "input_fingerprint"
+      ],
+      "title": "UnderstandingProvenance",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "answers": {
+      "$ref": "#/$defs/UnderstandingAnswers"
+    },
+    "paper_id": {
+      "title": "Paper Id",
+      "type": "string"
+    },
+    "provenance": {
+      "$ref": "#/$defs/UnderstandingProvenance"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "paper_id",
+    "answers",
+    "provenance"
+  ],
+  "title": "ScientificUnderstanding",
+  "type": "object"
+}

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Research Presentation"
+  short_description: "Build source-grounded academic presentations"
+  brand_color: "#2563EB"
+  default_prompt: "Use $research-presentation to turn this paper and its LaTeX source into a traceable research presentation."

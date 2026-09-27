@@ -1,0 +1,66 @@
+{
+  "schema_version":"1.0","mode":"paper-reading","theme":"group-meeting","language_profile":"zh_cn_bilingual_terms",
+  "presentation":{"language":"zh-CN","terminology_mode":"bilingual","preserve_source_visual_language":true,"translate_generic_labels":true,"translate_speaker_notes":true},
+  "slides":[
+    {
+      "unit_id":"unit_cc052becabe4","purpose":"建立超大规模 MoE 的系统问题框架。","question":"超大规模 MoE 训练为什么是系统联合设计问题？","title":"MoE 扩展同时受计算、通信与成本约束","title_kind":"claim","technical_title":"System Co-Design Problem","main_claim":"模型扩展必须同时控制推理效率、训练成本和跨节点通信开销。",
+      "body":["稀疏专家降低单次计算量，但增加跨节点路由与通信。","单一模型模块无法独立解决训练吞吐与部署效率。"],"visuals":[],"annotations":[],"takeaway":"核心结论：DeepSeek-V3 应当作为联合系统而不是模块清单阅读。","evidence_ids":["evidence_393114edbd53"],
+      "speaker_notes":{"purpose":"建立超大规模 MoE 的系统问题框架。","main_message":"模型扩展必须同时控制推理效率、训练成本和跨节点通信开销。","script":"这份技术报告覆盖架构、数值格式、并行调度和部署。MoE 能减少每个 token 的激活计算，但专家跨节点分布会增加通信，因此后续模块要放在同一系统约束下理解。","visual_guidance":"用两层文字区分模型计算与系统通信问题。","transition":"先用参数规模建立这套系统的复杂度基线。","estimated_seconds":60},"layout":"minimal_text"
+    },
+    {
+      "unit_id":"unit_b0bd1fa0d4a2","purpose":"说明 DeepSeek-V3 的稀疏参数规模。","question":"DeepSeek-V3 的稀疏规模如何定义？","title":"671B 总参数中每个 token 激活 37B","title_kind":"claim","technical_title":"Sparse MoE Scale","main_claim":"模型共有 671B 参数，每个 token 激活 37B 参数，以稀疏 MoE 控制计算量。",
+      "body":["总参数规模：671B。","每个 token 的激活参数规模：37B。","稀疏路由把模型容量与单次计算成本部分解耦。"],"visuals":[],"annotations":[],"takeaway":"核心结论：参数容量远大于单个 token 实际使用的计算路径。","evidence_ids":["evidence_b8be9cac8dfd"],
+      "speaker_notes":{"purpose":"说明 DeepSeek-V3 的稀疏参数规模。","main_message":"模型共有 671B 参数，每个 token 激活 37B 参数，以稀疏 MoE 控制计算量。","script":"模型总参数为 671B，但每个 token 只激活 37B 参数。这个差异解释了为什么专家路由、负载均衡和跨节点通信会成为报告的核心议题。","visual_guidance":"突出总参数与激活参数的数量关系，不添加未引用的推算。","transition":"下一页进入支撑这种规模的 MLA 与 DeepSeekMoE 架构。","estimated_seconds":55},"layout":"minimal_text"
+    },
+    {
+      "unit_id":"unit_0a71c4caa598","purpose":"用原始架构图说明 MLA 与 DeepSeekMoE 的分工。","question":"基础架构如何兼顾推理和训练成本？","title":"MLA 面向高效推理，DeepSeekMoE 控制训练成本","title_kind":"claim","technical_title":"Base Architecture","main_claim":"Multi-head Latent Attention 与 DeepSeekMoE 分别面向高效推理和经济训练。",
+      "body":["Multi-head Latent Attention（MLA）压缩注意力状态。","DeepSeekMoE 通过稀疏专家扩大容量并控制激活计算。"],
+      "visuals":[{"visual_id":"c_architecture","kind":"source_asset","source_ref":"asset_e91c5d151361","role":"primary","treatment":"original","caption":"论文原始 Figure：DeepSeek-V3 basic architecture","annotations":["按 Attention、Shared Expert 和 Routed Expert 区域依次解释。"]}],
+      "annotations":[],"takeaway":"核心结论：注意力状态压缩与稀疏专家共同构成基础效率框架。","evidence_ids":["evidence_2518142d87ff"],
+      "speaker_notes":{"purpose":"用原始架构图说明 MLA 与 DeepSeekMoE 的分工。","main_message":"Multi-head Latent Attention 与 DeepSeekMoE 分别面向高效推理和经济训练。","script":"基础 Transformer 之上，MLA 负责降低注意力推理开销，DeepSeekMoE 则通过共享专家和路由专家增加模型容量。这里先建立模块关系，下一页再讲训练目标如何约束专家使用。","visual_guidance":"保持原图英文标签，先讲注意力路径，再讲专家路径。","transition":"基础架构之上，报告增加两项训练目标创新。","estimated_seconds":80},"layout":"visual_left_text_right"
+    },
+    {
+      "unit_id":"unit_67824d54690d","purpose":"解释无辅助损失均衡与多 token 预测。","question":"负载均衡与预测目标有哪些新设计？","title":"无辅助损失均衡与 MTP 分别改进路由和监督","title_kind":"claim","technical_title":"Load Balancing and MTP","main_claim":"Auxiliary-Loss-Free Load Balancing 降低均衡约束的性能代价，MTP 增加多 token 预测监督。",
+      "body":["路由偏置用于调节专家负载，不把强均衡损失直接加入主目标。","Multi-Token Prediction（MTP）沿完整因果链增加后续 token 监督。"],
+      "visuals":[{"visual_id":"c_mtp","kind":"source_asset","source_ref":"asset_dee078e3c356","role":"primary","treatment":"original","caption":"论文原始 Figure：Multi-Token Prediction","annotations":["沿预测深度查看各 token 的完整因果链。"]}],
+      "annotations":[],"takeaway":"核心结论：两项策略分别处理专家均衡与训练信号密度。","evidence_ids":["evidence_fa9ef8d64091"],
+      "speaker_notes":{"purpose":"解释无辅助损失均衡与多 token 预测。","main_message":"Auxiliary-Loss-Free Load Balancing 降低均衡约束的性能代价，MTP 增加多 token 预测监督。","script":"第一项设计通过路由偏置维持专家负载，减少辅助均衡损失对主任务的干扰。第二项设计让每个位置额外预测后续 token，并保持完整因果链。两者解决的是不同问题。","visual_guidance":"先用正文解释路由偏置，再沿原始 MTP Figure 查看预测链。","transition":"训练目标明确后，继续看 FP8 与系统调度如何支撑规模化训练。","estimated_seconds":85},"layout":"visual_left_text_right"
+    },
+    {
+      "unit_id":"unit_2165fd0319d0","purpose":"说明低精度与通信重叠的系统协同。","question":"FP8 与系统工程如何降低训练开销？","title":"FP8 降低数值开销，DualPipe 隐藏通信等待","title_kind":"claim","technical_title":"FP8 Training System","main_claim":"FP8 混合精度减少计算与存储成本，DualPipe 和通信重叠缓解跨节点 MoE 瓶颈。",
+      "body":["FP8 用于关键线性算子的低精度计算与存储。","细粒度量化与高精度累积缓解异常值和累积误差。","DualPipe 通过计算与通信重叠减少流水线空泡。"],
+      "visuals":[
+        {"visual_id":"c_fp8","kind":"source_asset","source_ref":"asset_53f2cb8e0c5b","role":"primary","treatment":"original","caption":"FP8 mixed precision framework","annotations":[]},
+        {"visual_id":"c_dualpipe","kind":"source_asset","source_ref":"asset_7f2ce2f647dc","role":"supporting","treatment":"original","caption":"DualPipe bidirectional schedule","annotations":[]}
+      ],
+      "annotations":[],"takeaway":"核心结论：低精度格式需要与量化策略和并行调度共同设计。","evidence_ids":["evidence_63be2e5137e5","evidence_393114edbd53"],
+      "speaker_notes":{"purpose":"说明低精度与通信重叠的系统协同。","main_message":"FP8 混合精度减少计算与存储成本，DualPipe 和通信重叠缓解跨节点 MoE 瓶颈。","script":"上图说明 FP8 如何进入线性算子的前向与反向路径，同时保留高精度累积。下图展示 DualPipe 的双向调度如何让计算与通信相互覆盖。两类优化分别处理数值开销和流水线空泡。","visual_guidance":"先读上方 FP8 路径，再读下方设备时间轴，分别对应数值与调度。","transition":"下一页用训练成本和长上下文结果检查联合设计成效。","estimated_seconds":90},"layout":"visual_left_text_right"
+    },
+    {
+      "unit_id":"unit_18e434ac76ed","purpose":"选择成本与长上下文两个互补结果。","question":"联合设计最终带来了哪些可量化结果？","title":"完整训练耗时 2.788M GPU hours，长上下文达到 128K","title_kind":"claim","technical_title":"Scale Results","main_claim":"完整训练消耗 2.788M H800 GPU hours，并在 NIAH 测试中保持至 128K 上下文的稳健表现。",
+      "body":["完整训练共消耗 2.788M H800 GPU hours。","NIAH 在最长 128K 上下文与不同文档深度下保持满分。"],
+      "visuals":[
+        {"visual_id":"c_long_context","kind":"source_asset","source_ref":"asset_cfce02990890","role":"primary","treatment":"original","caption":"NIAH long-context evaluation","annotations":[]}
+      ],
+      "annotations":[],"takeaway":"核心结论：系统效率与长上下文能力需要用不同证据分别验证。","evidence_ids":["evidence_0406d76c2a32","evidence_aac29055741a"],
+      "speaker_notes":{"purpose":"选择成本与长上下文两个互补结果。","main_message":"完整训练消耗 2.788M H800 GPU hours，并在 NIAH 测试中保持至 128K 上下文的稳健表现。","script":"标题中的 2.788M H800 GPU hours 来自完整训练成本表。图中横轴把上下文扩展到 128K，纵轴改变信息在文档中的深度；整张热力图保持满分，说明检索结果在这一测试范围内稳定。成本和 NIAH 分别验证系统效率与长上下文能力。","visual_guidance":"先沿横轴读到 128K，再沿纵轴检查不同文档深度；不要把 NIAH 外推为所有长上下文能力。","transition":"接下来用消融检验两项训练策略是否独立有效。","estimated_seconds":80},"layout":"visual_left_text_right"
+    },
+    {
+      "unit_id":"unit_8a950a47e02e","purpose":"并列检查 MTP 与负载均衡策略的消融证据。","question":"MTP 与无辅助损失均衡是否各自有效？","title":"两组消融分别支持 MTP 与无辅助损失均衡","title_kind":"claim","technical_title":"Ablation Evidence","main_claim":"两组消融分别显示 MTP 和无辅助损失负载均衡在多数基准上带来一致收益。",
+      "body":["MTP 在保持其他条件一致时改善多数评测基准。","无辅助损失方案在多数基准上优于纯辅助损失基线。"],
+      "visuals":[{"visual_id":"c_mtp_ablation","kind":"source_table","source_ref":"table_004","role":"primary","treatment":"highlight","annotations":[]}],
+      "annotations":["另一组负载均衡消融通过同页文字保留结论与证据引用。"],"takeaway":"核心结论：训练目标创新具有独立消融支持。","evidence_ids":["evidence_8e0e6fb2d2ec","evidence_666c342e805d"],
+      "speaker_notes":{"purpose":"并列检查 MTP 与负载均衡策略的消融证据。","main_message":"两组消融分别显示 MTP 和无辅助损失负载均衡在多数基准上带来一致收益。","script":"右侧保留 MTP 表头与代码、数学相关代表行，便于直接比较 Baseline 和 w/ MTP。左侧文字同时说明另一张独立表中的负载均衡消融。两项结论来自不同实验，不能合并成同一数值提升。","visual_guidance":"先比较右侧表中的 Baseline 与 w/ MTP，再用左侧第二条说明负载均衡证据来自 Table 5。","transition":"训练效率成立之后，现实部署门槛仍需单独讨论。","estimated_seconds":75},"layout":"comparison"
+    },
+    {
+      "unit_id":"unit_b794dce406e0","purpose":"澄清训练经济性不等于低部署门槛。","question":"这套系统对使用者仍有什么门槛？","title":"高效推理仍依赖较大的部署单元","title_kind":"claim","technical_title":"Deployment Limitation","main_claim":"推荐部署单元仍然较大，小规模团队难以直接承担高效推理基础设施。",
+      "body":["训练成本优化建立在大规模硬件与系统协同之上。","推理部署仍需要较大的基础设施单元。"],"visuals":[],"annotations":[],"takeaway":"核心结论：训练经济性不能直接外推为普遍可部署性。","evidence_ids":["evidence_aa9b4acec16c"],
+      "speaker_notes":{"purpose":"澄清训练经济性不等于低部署门槛。","main_message":"推荐部署单元仍然较大，小规模团队难以直接承担高效推理基础设施。","script":"报告强调训练效率，但作者也明确指出部署单元仍然较大。对小团队而言，复现训练方法和实际承担高效在线推理是两项不同的基础设施要求。","visual_guidance":"保留留白，突出训练效率与部署门槛的区别。","transition":"最后回到整份报告最重要的联合设计方法。","estimated_seconds":55},"layout":"minimal_text"
+    },
+    {
+      "unit_id":"unit_6cf0a8431e9d","purpose":"总结复杂技术报告中的主线关系。","question":"应如何概括 DeepSeek-V3 的主要贡献？","title":"稀疏架构、训练目标与系统工程共同决定成效","title_kind":"claim","technical_title":"Takeaway","main_claim":"其优势来自稀疏架构、训练目标、FP8 数值格式与系统工程的联合设计。",
+      "body":["MLA 与 DeepSeekMoE 构成高效基础架构。","无辅助损失均衡和 MTP 改进训练目标。","FP8、DualPipe 与通信优化把设计扩展到系统规模。"],"visuals":[],"annotations":[],"takeaway":"核心结论：复杂模型的性能与成本来自跨层协同，而非单一技巧。","evidence_ids":["evidence_b5ad41ed20b8"],
+      "speaker_notes":{"purpose":"总结复杂技术报告中的主线关系。","main_message":"其优势来自稀疏架构、训练目标、FP8 数值格式与系统工程的联合设计。","script":"阅读这类长技术报告时，最重要的是保留层级关系。基础架构决定计算路径，训练目标约束专家与预测信号，FP8 和系统调度再把这些选择扩展到大规模硬件。","visual_guidance":"按架构、训练目标、系统实现三层收束。","transition":"结束汇报。","estimated_seconds":45},"layout":"minimal_text"
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0",
+  "paper_id": "attention-is-all-you-need-277a3557ef",
+  "answers": {
+    "problem": {
+      "status": "supported",
+      "evidence_ids": [
+        "evidence_d95a34ac8471"
+      ],
+      "note": "Grounded in the cited evidence nodes."
+    },
+    "importance": {
+      "status": "insufficient_evidence",
+      "evidence_ids": [],
+      "note": "The supplied artifacts do not contain enough evidence to answer this question safely."
+    },
+    "existing_approaches": {
+      "status": "insufficient_evidence",
+      "evidence_ids": [],
+      "note": "The supplied artifacts do not contain enough evidence to answer this question safely."
+    },
+    "gap": {
+      "status": "insufficient_evidence",
+      "evidence_ids": [],
+      "note": "The supplied artifacts do not contain enough evidence to answer this question safely."
+    },
+    "central_insight": {
+      "status": "supported",
+      "evidence_ids": [
+        "evidence_38e5dbdebe5f"
+      ],
+      "note": "Grounded in the cited evidence nodes."
+    },
+    "contributions": {
+      "status": "insufficient_evidence",
+      "evidence_ids": [],
+      "note": "The supplied artifacts do not contain enough evidence to answer this question safely."
+    },
+    "method": {
+      "status": "supported",
+      "evidence_ids": [
+        "evidence_49c833ade712"
+      ],
+      "note": "Grounded in the cited evidence nodes."
+    },
+    "design_rationale": {
+      "status": "insufficient_evidence",
+      "evidence_ids": [],
+      "note": "The supplied artifacts do not contain enough evidence to answer this question safely."
+    },
+    "experiment_findings": {
+      "status": "supported",
+      "evidence_ids": [
+        "evidence_f918ef30ed37"
+      ],
+      "note": "Grounded in the cited evidence nodes."
+    },
+    "ablation_findings": {
+      "status": "insufficient_evidence",
+      "evidence_ids": [],
+      "note": "The supplied artifacts do not contain enough evidence to answer this question safely."
+    },
+    "limitations": {
+      "status": "supported",
+      "evidence_ids": [
+        "evidence_2aaf4548dfbf"
+      ],
+      "note": "Grounded in the cited evidence nodes."
+    },
+    "audience_takeaways": {
+      "status": "supported",
+      "evidence_ids": [
+        "evidence_6723ce29875a"
+      ],
+      "note": "Grounded in the cited evidence nodes."
+    }
+  },
+  "provenance": {
+    "provider": "json-draft",
+    "model": "offline-fixture",
+    "prompt_version": "understand-paper-v1",
+    "input_fingerprint": "1586bf063cb0a5178a5b4c02b989692f18121db16531ec8eb7454fd7553e278b"
+  }
+}

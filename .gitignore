@@ -1,0 +1,25 @@
+.venv/
+.env
+.env.*
+!.env.example
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+dist/
+build/
+node_modules/
+*.egg-info/
+output/
+workspace/
+tests/fixtures/**/generated/
+examples/phase12/wheel_cache/
+
+# Third-party paper originals are downloaded locally for real-world validation.
+# Keep derived drafts/reports in Git, but do not redistribute the PDF/source archives.
+examples/real-world/**/input/paper.pdf
+examples/real-world/**/input/source.tar
+
+# Local OS/editor state.
+.DS_Store
+Thumbs.db

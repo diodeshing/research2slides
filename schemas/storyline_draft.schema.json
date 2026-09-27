@@ -1,0 +1,185 @@
+{
+  "$defs": {
+    "DraftPresentationUnit": {
+      "additionalProperties": false,
+      "properties": {
+        "estimated_seconds": {
+          "maximum": 300,
+          "minimum": 20,
+          "title": "Estimated Seconds",
+          "type": "integer"
+        },
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "importance": {
+          "maximum": 5,
+          "minimum": 1,
+          "title": "Importance",
+          "type": "integer"
+        },
+        "main_claim": {
+          "minLength": 1,
+          "title": "Main Claim",
+          "type": "string"
+        },
+        "question": {
+          "minLength": 1,
+          "title": "Question",
+          "type": "string"
+        },
+        "rationale": {
+          "minLength": 1,
+          "title": "Rationale",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "opening",
+            "problem",
+            "background",
+            "existing_approaches",
+            "gap",
+            "core_insight",
+            "contributions",
+            "method_overview",
+            "method_component",
+            "experiments",
+            "ablation",
+            "analysis",
+            "limitations",
+            "conclusion",
+            "takeaway"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "section": {
+          "minLength": 1,
+          "title": "Section",
+          "type": "string"
+        },
+        "transition_intent": {
+          "minLength": 1,
+          "title": "Transition Intent",
+          "type": "string"
+        }
+      },
+      "required": [
+        "role",
+        "section",
+        "question",
+        "main_claim",
+        "evidence_ids",
+        "importance",
+        "estimated_seconds",
+        "rationale",
+        "transition_intent"
+      ],
+      "title": "DraftPresentationUnit",
+      "type": "object"
+    },
+    "LanguageProfile": {
+      "enum": [
+        "zh_cn_bilingual_terms"
+      ],
+      "title": "LanguageProfile",
+      "type": "string"
+    },
+    "PresentationLanguageConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "language": {
+          "const": "zh-CN",
+          "default": "zh-CN",
+          "title": "Language",
+          "type": "string"
+        },
+        "preserve_source_visual_language": {
+          "const": true,
+          "default": true,
+          "title": "Preserve Source Visual Language",
+          "type": "boolean"
+        },
+        "terminology_mode": {
+          "const": "bilingual",
+          "default": "bilingual",
+          "title": "Terminology Mode",
+          "type": "string"
+        },
+        "translate_generic_labels": {
+          "const": true,
+          "default": true,
+          "title": "Translate Generic Labels",
+          "type": "boolean"
+        },
+        "translate_speaker_notes": {
+          "const": true,
+          "default": true,
+          "title": "Translate Speaker Notes",
+          "type": "boolean"
+        }
+      },
+      "title": "PresentationLanguageConfig",
+      "type": "object"
+    },
+    "PresentationMode": {
+      "enum": [
+        "paper-reading",
+        "own-research"
+      ],
+      "title": "PresentationMode",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "language_profile": {
+      "$ref": "#/$defs/LanguageProfile",
+      "default": "zh_cn_bilingual_terms"
+    },
+    "mode": {
+      "$ref": "#/$defs/PresentationMode"
+    },
+    "presentation": {
+      "$ref": "#/$defs/PresentationLanguageConfig"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "target_audience": {
+      "minLength": 1,
+      "title": "Target Audience",
+      "type": "string"
+    },
+    "title": {
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "units": {
+      "items": {
+        "$ref": "#/$defs/DraftPresentationUnit"
+      },
+      "minItems": 1,
+      "title": "Units",
+      "type": "array"
+    }
+  },
+  "required": [
+    "mode",
+    "title",
+    "target_audience",
+    "units"
+  ],
+  "title": "StorylineDraft",
+  "type": "object"
+}

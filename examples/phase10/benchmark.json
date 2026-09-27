@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "papers": [
+    {"paper_id":"attention","workspace":"../real-world/paper-a-attention/workspace","semantic_draft":"../real-world/paper-a-attention/input/semantic_qa_draft.json"},
+    {"paper_id":"segment-anything","workspace":"../real-world/paper-b-segment-anything/workspace","semantic_draft":"../real-world/paper-b-segment-anything/input/semantic_qa_draft.json"},
+    {"paper_id":"deepseek-v3","workspace":"../phase8/deepseek-v3-refined/workspace","semantic_draft":"../real-world/paper-c-deepseek-v3/input/semantic_qa_draft.json"}
+  ],
+  "mutations": [
+    {"case_id":"a-unsupported","paper_id":"attention","slide_id":"S03","operation":"claim_evidence","value":"unsupported","expected_code":"CLAIM_EVIDENCE_UNSUPPORTED"},
+    {"case_id":"a-partial","paper_id":"attention","slide_id":"S06","operation":"claim_evidence","value":"partially_supported","expected_code":"CLAIM_EVIDENCE_PARTIAL"},
+    {"case_id":"a-overstated","paper_id":"attention","slide_id":"S08","operation":"claim_strength","value":"overstated","expected_code":"CLAIM_STRENGTH_OVERSTATED"},
+    {"case_id":"a-order","paper_id":"attention","slide_id":"S05","operation":"dependency_order","value":["S06"],"expected_code":"STORYLINE_DEPENDENCY_ORDER"},
+    {"case_id":"b-unsupported","paper_id":"segment-anything","slide_id":"S02","operation":"claim_evidence","value":"unsupported","expected_code":"CLAIM_EVIDENCE_UNSUPPORTED"},
+    {"case_id":"b-partial","paper_id":"segment-anything","slide_id":"S05","operation":"claim_evidence","value":"partially_supported","expected_code":"CLAIM_EVIDENCE_PARTIAL"},
+    {"case_id":"b-overstated","paper_id":"segment-anything","slide_id":"S09","operation":"claim_strength","value":"overstated","expected_code":"CLAIM_STRENGTH_OVERSTATED"},
+    {"case_id":"b-order","paper_id":"segment-anything","slide_id":"S06","operation":"dependency_order","value":["S07"],"expected_code":"STORYLINE_DEPENDENCY_ORDER"},
+    {"case_id":"c-unsupported","paper_id":"deepseek-v3","slide_id":"S03","operation":"claim_evidence","value":"unsupported","expected_code":"CLAIM_EVIDENCE_UNSUPPORTED"},
+    {"case_id":"c-partial","paper_id":"deepseek-v3","slide_id":"S06","operation":"claim_evidence","value":"partially_supported","expected_code":"CLAIM_EVIDENCE_PARTIAL"},
+    {"case_id":"c-overstated","paper_id":"deepseek-v3","slide_id":"S09","operation":"claim_strength","value":"overstated","expected_code":"CLAIM_STRENGTH_OVERSTATED"},
+    {"case_id":"c-order","paper_id":"deepseek-v3","slide_id":"S07","operation":"dependency_order","value":["S08"],"expected_code":"STORYLINE_DEPENDENCY_ORDER"}
+  ]
+}

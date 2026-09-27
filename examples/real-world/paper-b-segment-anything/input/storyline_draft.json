@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "mode": "paper-reading",
+  "language_profile": "zh_cn_bilingual_terms",
+  "presentation": {"language": "zh-CN", "terminology_mode": "bilingual", "preserve_source_visual_language": true, "translate_generic_labels": true, "translate_speaker_notes": true},
+  "title": "Segment Anything：任务、模型与数据闭环",
+  "target_audience": "熟悉计算机视觉与基础模型的研究生组会听众",
+  "units": [
+    {"role":"problem","section":"问题定义","question":"为什么分割基础模型不能只依赖现有互联网数据？","main_claim":"分割掩码无法像文本或图像一样从互联网自然获得，规模化数据成为首要瓶颈。","evidence_ids":["evidence_15fa874c8c69"],"importance":5,"estimated_seconds":55,"rationale":"先解释任务为何需要模型与数据共同设计。","transition_intent":"由数据缺口引出 Promptable Segmentation。"},
+    {"role":"core_insight","section":"核心任务","question":"什么任务能够同时支持预训练与零样本迁移？","main_claim":"Promptable Segmentation 要求任意提示至少产生一个有效掩码，并把提示工程带入分割。","evidence_ids":["evidence_067d2f1c63ab"],"importance":5,"estimated_seconds":65,"rationale":"任务定义决定模型和数据引擎的设计。","transition_intent":"进入满足该任务约束的 SAM 架构。"},
+    {"role":"method_overview","section":"模型架构","question":"SAM 如何处理不同提示与歧义？","main_claim":"SAM 由图像编码器、提示编码器和轻量掩码解码器组成，并为歧义提示预测多个候选掩码。","evidence_ids":["evidence_a25c23a98e97","evidence_7912ea7c2e15"],"importance":5,"estimated_seconds":85,"rationale":"用原始模型图解释计算分工与实时性来源。","transition_intent":"模型能力进一步成为数据生产工具。"},
+    {"role":"method_component","section":"数据引擎","question":"模型如何反过来扩展训练数据？","main_claim":"数据引擎从辅助人工走向半自动与全自动，让模型改进和数据扩张形成闭环。","evidence_ids":["evidence_39a37063b02f"],"importance":5,"estimated_seconds":75,"rationale":"三阶段演化是论文系统贡献的关键。","transition_intent":"量化最终数据集的规模。"},
+    {"role":"contributions","section":"数据规模","question":"闭环最终生成了多大的数据集？","main_claim":"全自动流程覆盖 11M 张图像并生成 1.1B 个高质量掩码。","evidence_ids":["evidence_880baf60bf59"],"importance":5,"estimated_seconds":55,"rationale":"明确 SA-1B 的规模与生成方式。","transition_intent":"检验规模是否转化为跨任务能力。"},
+    {"role":"experiments","section":"零样本实验","question":"SAM 的零样本能力覆盖哪些场景？","main_claim":"单点提示在 23 个数据集上产生高质量掩码，并扩展到边缘、实例分割与文本提示等任务。","evidence_ids":["evidence_ac5f08f90510"],"importance":5,"estimated_seconds":80,"rationale":"结合定量与定性视觉检查迁移能力。","transition_intent":"用消融分离数据阶段和规模因素。"},
+    {"role":"ablation","section":"消融分析","question":"性能提升来自哪些数据与模型因素？","main_claim":"消融分别检查数据引擎阶段、图像编码器规模和训练数据规模。","evidence_ids":["evidence_f31baf57596b"],"importance":4,"estimated_seconds":65,"rationale":"避免把结果简单归因于一个因素。","transition_intent":"最后讨论模型和数据的适用边界。"},
+    {"role":"limitations","section":"局限与责任边界","question":"SAM 和 SA-1B 仍有哪些重要限制？","main_claim":"模型仍会遗漏细结构且端到端速度受重型编码器限制，数据地域与收入代表性也不均衡。","evidence_ids":["evidence_24b769ea7500","evidence_74dac3e54d1d"],"importance":5,"estimated_seconds":75,"rationale":"同时保留模型能力边界与数据责任问题。","transition_intent":"用任务、模型和数据的联合设计收束。"},
+    {"role":"takeaway","section":"核心结论","question":"Segment Anything 最值得复用的研究思路是什么？","main_claim":"真正的贡献是任务、模型与数据闭环共同设计，而非单独放大一个视觉模型。","evidence_ids":["evidence_54cc2792a78d"],"importance":5,"estimated_seconds":45,"rationale":"给出可迁移到其他基础模型项目的总结。","transition_intent":"结束汇报。"}
+  ]
+}

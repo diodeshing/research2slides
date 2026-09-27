@@ -1,0 +1,173 @@
+{
+  "$defs": {
+    "AssetKind": {
+      "enum": [
+        "figure",
+        "table",
+        "equation"
+      ],
+      "title": "AssetKind",
+      "type": "string"
+    },
+    "AssetOrigin": {
+      "enum": [
+        "latex_vector",
+        "latex_raster",
+        "pdf_embedded",
+        "pdf_crop"
+      ],
+      "title": "AssetOrigin",
+      "type": "string"
+    },
+    "VisualAsset": {
+      "additionalProperties": false,
+      "properties": {
+        "asset_id": {
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "caption": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Caption"
+        },
+        "media_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Media Type"
+        },
+        "number": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Number"
+        },
+        "origin": {
+          "$ref": "#/$defs/AssetOrigin"
+        },
+        "output_path": {
+          "title": "Output Path",
+          "type": "string"
+        },
+        "page": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page"
+        },
+        "priority": {
+          "maximum": 4,
+          "minimum": 1,
+          "title": "Priority",
+          "type": "integer"
+        },
+        "related_section": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Related Section"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "source_label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Label"
+        },
+        "source_path": {
+          "title": "Source Path",
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/AssetKind"
+        }
+      },
+      "required": [
+        "asset_id",
+        "type",
+        "origin",
+        "priority",
+        "source_path",
+        "output_path",
+        "sha256"
+      ],
+      "title": "VisualAsset",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "assets": {
+      "items": {
+        "$ref": "#/$defs/VisualAsset"
+      },
+      "title": "Assets",
+      "type": "array"
+    },
+    "paper_id": {
+      "title": "Paper Id",
+      "type": "string"
+    },
+    "priority_policy": {
+      "items": {
+        "$ref": "#/$defs/AssetOrigin"
+      },
+      "title": "Priority Policy",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "paper_id"
+  ],
+  "title": "VisualManifest",
+  "type": "object"
+}

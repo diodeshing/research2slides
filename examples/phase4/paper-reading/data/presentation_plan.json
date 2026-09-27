@@ -1,0 +1,116 @@
+{
+  "schema_version": "1.1",
+  "paper_id": "attention-is-all-you-need-277a3557ef",
+  "mode": "paper-reading",
+  "language": "zh-en",
+  "title": "Attention-based Sequence Modeling — Fixture Walkthrough",
+  "target_audience": "AI/CV graduate group meeting",
+  "units": [
+    {
+      "unit_id": "unit_9e564cc37877",
+      "order": 1,
+      "role": "problem",
+      "section": "Problem",
+      "question": "What modeling problem motivates the architecture?",
+      "main_claim": "Sequence modeling motivates an architecture centered on attention operations.",
+      "evidence_ids": [
+        "evidence_d95a34ac8471"
+      ],
+      "importance": 5,
+      "estimated_seconds": 55,
+      "rationale": "The audience needs the problem before the architectural idea.",
+      "transition_intent": "Move from the motivation to the central interaction mechanism."
+    },
+    {
+      "unit_id": "unit_47231083e30d",
+      "order": 2,
+      "role": "core_insight",
+      "section": "Core Idea",
+      "question": "What interaction is central to the fixture?",
+      "main_claim": "The attention block connects queries, keys, and values.",
+      "evidence_ids": [
+        "evidence_38e5dbdebe5f"
+      ],
+      "importance": 5,
+      "estimated_seconds": 65,
+      "rationale": "This is the central conceptual unit.",
+      "transition_intent": "Translate the concept into its mathematical operation."
+    },
+    {
+      "unit_id": "unit_23e9be3abd66",
+      "order": 3,
+      "role": "method_overview",
+      "section": "Method",
+      "question": "How is the attention operation expressed?",
+      "main_claim": "The fixture defines attention as Attention(Q,K,V)=softmax(QK^T)V.",
+      "evidence_ids": [
+        "evidence_49c833ade712"
+      ],
+      "importance": 5,
+      "estimated_seconds": 80,
+      "rationale": "The equation makes the mechanism concrete.",
+      "transition_intent": "Use the result table to inspect whether the idea is supported."
+    },
+    {
+      "unit_id": "unit_5794ab56ee00",
+      "order": 4,
+      "role": "experiments",
+      "section": "Evidence",
+      "question": "What result does the fixture report?",
+      "main_claim": "The fixture model scores 11.0 versus 10.0 for the fixture baseline.",
+      "evidence_ids": [
+        "evidence_f918ef30ed37"
+      ],
+      "importance": 4,
+      "estimated_seconds": 65,
+      "rationale": "This is the only quantitative comparison in the fixture.",
+      "transition_intent": "Qualify the result before drawing a takeaway."
+    },
+    {
+      "unit_id": "unit_3d818af8a50c",
+      "order": 5,
+      "role": "limitations",
+      "section": "Critical Analysis",
+      "question": "How should the reported values be interpreted?",
+      "main_claim": "The result values are invented solely for software testing.",
+      "evidence_ids": [
+        "evidence_2aaf4548dfbf"
+      ],
+      "importance": 5,
+      "estimated_seconds": 40,
+      "rationale": "The fixture disclaimer prevents a false scientific conclusion.",
+      "transition_intent": "Close with the supported conceptual takeaway only."
+    },
+    {
+      "unit_id": "unit_273101eeac0e",
+      "order": 6,
+      "role": "takeaway",
+      "section": "Takeaway",
+      "question": "What should the audience retain?",
+      "main_claim": "The fixture links attention to queries, keys, and values.",
+      "evidence_ids": [
+        "evidence_6723ce29875a"
+      ],
+      "importance": 5,
+      "estimated_seconds": 40,
+      "rationale": "The ending restates the supported central message.",
+      "transition_intent": "End the presentation."
+    }
+  ],
+  "estimated_total_seconds": 345,
+  "coverage_gaps": [
+    "research gap"
+  ],
+  "compression": {
+    "time_budget_seconds": 345,
+    "omitted_unit_ids": [
+      "unit_54ec9fa3929b"
+    ]
+  },
+  "provenance": {
+    "provider": "json-storyline",
+    "model": "offline-fixture",
+    "prompt_version": "storyline-v1",
+    "input_fingerprint": "ab36a1e6d5413bf63de90b510b5cf8591de46bad14c0cbd8085c6cc1dc918095"
+  }
+}
